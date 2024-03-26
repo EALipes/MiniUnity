@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MiniUnity.Game" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <AssociationLine Name="Scene" Type="MiniUnity.Scene">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.914" Y="0.36" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Orchestrator" Type="MiniUnity.UpdateOrchestrator" FixedFromPoint="true">
+      <Path>
+        <Point X="0.875" Y="2.63" />
+        <Point X="0.875" Y="3.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.015" Y="0.393" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAACAAAAgAgAAAAIAAAAAAAAAAgAAAAIAAAAA=</HashCode>
+      <FileName>MiniUnity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Orchestrator" />
+      <Property Name="Scene" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MiniUnity.GameObject" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="MiniUnity.GameObject.OnStartHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MiniUnity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="MiniUnity.GameObject.OnUpdateHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MiniUnity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACBIAAAAEAAERAAgAAAAAAAEAAAAAAEgAAA=</HashCode>
+      <FileName>MiniUnity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUnity.Scene">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MiniUnity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniUnity.UpdateOrchestrator" Collapsed="true">
+    <Position X="0.75" Y="3.25" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="MiniUnity.UpdateOrchestrator.UpdateFunc" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MiniUnity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="MiniUnity.UpdateOrchestrator.HasFinishedFunc" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MiniUnity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AARAAAAAAQIAAIAAAAAAEAAAACAAAAAAIABAAIkAAhA=</HashCode>
+      <FileName>MiniUnity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MiniUnity.Clock" Collapsed="true">
+    <Position X="0.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABABAABAQIAAAAAAAABAAAAACBAAAAAIAAAAEgAAAA=</HashCode>
+      <FileName>MiniUnity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MiniUnity.IClock" Collapsed="true">
+    <Position X="0.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAQIAAAAAAAAAAAAAACAAAAAAIAAAAAgAAAA=</HashCode>
+      <FileName>MiniUnity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MiniUnity.GameObject">
+    <Position X="3.5" Y="1.5" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="MiniUnity.GameObject.OnStartHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MiniUnity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="MiniUnity.GameObject.OnUpdateHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MiniUnity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACBIAAAAEAAERAAgAAAAAAAEAAAAAAEgAAA=</HashCode>
+      <FileName>MiniUnity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parent" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="Children" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="System.Collections.Generic.List&lt;T&gt;" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
