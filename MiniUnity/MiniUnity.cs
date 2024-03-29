@@ -44,7 +44,7 @@ namespace MiniUnity
             }
         }
 
-        protected Scene scene;
+        protected Scene scene { get; set; };
 
 
 
@@ -173,7 +173,8 @@ namespace MiniUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public GameObject GetParentComponent<T>()
+        public T  GetParentComponent<T>()
+            where T:GameObject
         {
             GameObject result = null;
             if (Parent == null) return null;
@@ -204,11 +205,12 @@ namespace MiniUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public GameObject GetComponent<T>()
+        public T GetComponent<T>()
+            where T:GameObject
         {
             // Мне лень честно писать поиск первого подходящего элемента такого типа в списке,
             // поэтому я использовал LINQ, хотя это заклинание проходят только на старших курсах Хогвартса )))
-            var result = Children?.FirstOrDefault(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))) );
+            var result = Children?.FirstOrDefault(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))) ) as T;
             return result;
         }
 
@@ -217,11 +219,13 @@ namespace MiniUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public ICollection<GameObject> GetComponents<T>()
+        public ICollection<T> GetComponents<T>()
+            where T:GameObject
         {
             // Тоже LINQ
             var result = Children?
                 .Where(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))))
+                .Select(b=> b as T)
                 .ToList();
             return result;
         }
@@ -232,13 +236,13 @@ namespace MiniUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public BehaviorComponent GetBehavior<T>()
+        public T GetBehavior<T>()
             where T:BehaviorComponent
         {
             // Мне лень честно писать поиск первого подходящего элемента такого типа в списке,
             // поэтому я использовал LINQ, хотя это заклинание проходят только на старших курсах Хогвартса )))
             var result = Children?.FirstOrDefault(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))) );
-            return result as BehaviorComponent;
+            return result as T;
         }
 
         /// <summary>
@@ -246,12 +250,13 @@ namespace MiniUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public ICollection<BehaviorComponent> GetBehaviors<T>()
+        public ICollection<T> GetBehaviors<T>()
+            where T:BehaviorComponent
         {
             // Тоже LINQ
             var result = Children?
                 .Where(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))))
-                .Select(b => b as BehaviorComponent)
+                .Select(b => b as T)
                 .ToList();
             return result;
         }
