@@ -70,7 +70,8 @@ namespace MiniUnity.CannonGame
             base.Start();
 
             Cannon = GetComponent<Cannon>() as Cannon;
-            Projectile = GetComponent<Projectile>() as Projectile;
+            if (Cannon==null) throw new NullReferenceException("Не найден объект Cannon");
+            Projectile = GetComponent<Projectile>() as Projectile; 
 
             Cannon.Load(Projectile, Game.Angle, Game.Velocity);
             Cannon.Fire();
@@ -83,11 +84,14 @@ namespace MiniUnity.CannonGame
             // но я еще не придумал куда вставить управление игрой...
             CheckKeyboardCommands();
 
-            if (Game.Orchestrator.Stopped) return;
+            // Если время остановлено - нечего тут обновлять, выходим
+            if (Game.Orchestrator.Stopped) 
+                return;
 
             //Console.WriteLine(DateTime.Now.Minute+":"+DateTime.Now.Second+"."+DateTime.Now.Millisecond);
             base.Update();
 
+            // Если ядро упало - игра окончена.
             if (Projectile.Fallen)
                 IsOver = true;
         }
@@ -144,9 +148,10 @@ namespace MiniUnity.CannonGame
 
             projectile.Fallen = false;
             //projectile
+            // TODO! Вывод поправить, сделать в зависимости от типа приложения.
             Console.WriteLine("Бабах!");
 
-            projectile.Position.X = Position.Y;
+            projectile.Position.X = Position.X;
             projectile.Position.Y = Position.Y;
 
             var elevationAngleInRadians = elevationAngle * Math.PI / 180;
@@ -189,11 +194,9 @@ namespace MiniUnity.CannonGame
         // Или в GameObject.Render?
         // Положение снаряда
         public Vector3 Position = new Vector3();
-        //public Point Position = new Point();
 
         // Скорость снаряда
         public Vector3 Velocity = new Vector3();
-        //public Point Velocity = new Point();
 
         // Отметим момент падения и перестанем сообщать о ранее упавшем снаряде
         public bool Fallen = false;
@@ -204,9 +207,11 @@ namespace MiniUnity.CannonGame
         {
             //Game = GetParentComponent<Game>() as Game;
             Game = GetParentComponent<CannonGame>() as CannonGame;
-            if (Game==null) throw new NullReferenceException("Не найден объект игры");
+            if (Game==null) 
+                throw new NullReferenceException("Не найден объект игры");
             Scene=GetParentComponent<CannonScene>() as CannonScene;
-            if (Scene==null) throw new NullReferenceException("Не найден объект сцены");
+            if (Scene==null) 
+                throw new NullReferenceException("Не найден объект сцены");
             time = 0;
             base.Start();
         }

@@ -44,7 +44,7 @@ namespace MiniUnity
             }
         }
 
-        protected Scene scene { get; set; };
+        protected Scene scene { get; set; }
 
 
 
@@ -182,7 +182,7 @@ namespace MiniUnity
             if ((parentType == typeof(T))
                 ||
                 (parentType.IsSubclassOf(typeof(T))))
-                return Parent;
+                return Parent as T;
 
             return Parent.GetParentComponent<T>();
         }
