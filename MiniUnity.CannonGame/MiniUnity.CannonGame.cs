@@ -39,8 +39,8 @@ namespace MiniUnity.CannonGame
         public Cannon cannon;
         public Projectile projectile;
 
-        public float Velocity;
-        public float Angle;
+        public float Velocity { get; set; }
+        public float Angle { get; set; }
 
         /// <summary>
         /// Масштаб изображения - метров в сантиметре экрана
