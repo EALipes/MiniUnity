@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MiniUnity.CannonGame.cs" />
+    <Compile Include="Cannon.cs" />
+    <Compile Include="CannonGame.cs" />
+    <Compile Include="CannonScene.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
