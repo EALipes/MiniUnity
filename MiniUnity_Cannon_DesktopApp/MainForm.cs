@@ -34,6 +34,49 @@ namespace MiniUnity_Cannon_DesktopApp
             //SoundPlayerFall.Load();
 
 
+            //// События редактирования настроек игры
+            //// Изменение параметров при ручном редактировании элементов управления
+            //// Перенесено из InitializeComponent();
+            //this.VelocityEdit.ValueChanged += new System.EventHandler(this.VelocityEdit_ValueChanged);
+            //this.AngleEdit.ValueChanged += new System.EventHandler(this.AngleEdit_ValueChanged);
+
+            //this.TimeScaleEdit.ValueChanged += new System.EventHandler(this.TimeScaleEdit_ValueChanged);
+            //this.ScaleEdit.ValueChanged += new System.EventHandler(this.ScaleEdit_ValueChanged);
+            //this.FramePerSecEdit.ValueChanged += new System.EventHandler(this.FramePerSecEdit_ValueChanged);
+
+            //// Изменение элементов управления при изменении свойств gameParams
+            //// Подключение реакции на изменение Velocity
+            //gameParams.PropertyChanged += VelocityChanged_to_VelocityEdit;
+            //// Подключение реакции на изменение Angle
+            //gameParams.PropertyChanged += AngleChanged_to_AngleEdit;
+
+
+
+            // Подключение к событиям через привязку
+            Binding b = new Binding("Value", gameParams, "Speed", 
+                formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
+            VelocityEdit.DataBindings.Add(b);
+
+            Binding b2 = new Binding("Value", gameParams, "Speed");
+            VelocityProgressBar1.DataBindings.Add(b2);
+
+            Binding b3 = new Binding("Value", gameParams, "Speed",
+            formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
+            VelocityTrackBar1.DataBindings.Add(b3);
+
+            Binding bTS = new Binding("Value", gameParams, "TimeScale",
+                formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
+            this.TimeScaleEdit.DataBindings.Add(bTS); //ValueChanged += new System.EventHandler(this.TimeScaleEdit_ValueChanged);
+
+            Binding bS = new Binding("Value", gameParams, "GameScreenScale",
+                formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
+            this.ScaleEdit.DataBindings.Add(bS); //ValueChanged += new System.EventHandler(this.ScaleEdit_ValueChanged);
+            
+            Binding bFPS = new Binding("Value", gameParams, "FramesPerSec",
+                formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
+            this.FramePerSecEdit.DataBindings.Add(bFPS); //ValueChanged += new System.EventHandler(this.FramePerSecEdit_ValueChanged);
+
+
             // Инициализация игры
             // (В консольном приложении это сделано в Main(), тут удобнее это  сделать при инициализации главной формы.
             game = new CannonGame();
@@ -176,6 +219,9 @@ namespace MiniUnity_Cannon_DesktopApp
         #endregion
 
         #region События редактирования данных
+
+        // События при редактировании данных руками
+
         private void TimeScaleEdit_ValueChanged(object sender, EventArgs e)
         {
             GameParams.TimeScale = (float)TimeScaleEdit.Value;
@@ -200,6 +246,23 @@ namespace MiniUnity_Cannon_DesktopApp
         {
             GameParams.Speed = (float) VelocityEdit.Value;
         }
+
+        
+        // Отработка событий изменения данных "самой программой" - чтоб изменения отразились в элементах управления
+
+        private void VelocityChanged_to_VelocityEdit(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Velocity")
+                VelocityEdit.Value = (decimal)(sender as GameParameters)?.Speed;
+        }
+
+        private void AngleChanged_to_AngleEdit(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Angle")
+                AngleEdit.Value = (decimal)(sender as GameParameters)?.Angle;
+        }
+
+
         #endregion
     }
 

@@ -29,6 +29,7 @@ namespace MiniUnity_Cannon_DesktopApp
         private void InitializeComponent()
         {
             this.ControlPanel = new System.Windows.Forms.Panel();
+            this.VelocityProgressBar1 = new System.Windows.Forms.ProgressBar();
             this.GameParamGroupBox = new System.Windows.Forms.GroupBox();
             this.PlaySoundCheckBox = new System.Windows.Forms.CheckBox();
             this.ScaleEdit = new System.Windows.Forms.NumericUpDown();
@@ -44,6 +45,7 @@ namespace MiniUnity_Cannon_DesktopApp
             this.VelocityLabel = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.GameCanvasPanel = new System.Windows.Forms.Panel();
+            this.VelocityTrackBar1 = new System.Windows.Forms.TrackBar();
             this.ControlPanel.SuspendLayout();
             this.GameParamGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScaleEdit)).BeginInit();
@@ -51,10 +53,13 @@ namespace MiniUnity_Cannon_DesktopApp
             ((System.ComponentModel.ISupportInitialize)(this.FramePerSecEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AngleEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VelocityEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VelocityTrackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // ControlPanel
             // 
+            this.ControlPanel.Controls.Add(this.VelocityTrackBar1);
+            this.ControlPanel.Controls.Add(this.VelocityProgressBar1);
             this.ControlPanel.Controls.Add(this.GameParamGroupBox);
             this.ControlPanel.Controls.Add(this.RunButton);
             this.ControlPanel.Controls.Add(this.AngleEdit);
@@ -66,6 +71,18 @@ namespace MiniUnity_Cannon_DesktopApp
             this.ControlPanel.Name = "ControlPanel";
             this.ControlPanel.Size = new System.Drawing.Size(164, 674);
             this.ControlPanel.TabIndex = 0;
+            // 
+            // VelocityProgressBar1
+            // 
+            this.VelocityProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.VelocityProgressBar1.Location = new System.Drawing.Point(12, 192);
+            this.VelocityProgressBar1.Maximum = 500;
+            this.VelocityProgressBar1.Name = "VelocityProgressBar1";
+            this.VelocityProgressBar1.Size = new System.Drawing.Size(141, 23);
+            this.VelocityProgressBar1.Step = 1;
+            this.VelocityProgressBar1.TabIndex = 6;
+            this.VelocityProgressBar1.Value = 100;
             // 
             // GameParamGroupBox
             // 
@@ -112,7 +129,6 @@ namespace MiniUnity_Cannon_DesktopApp
             0,
             0,
             0});
-            this.ScaleEdit.ValueChanged += new System.EventHandler(this.ScaleEdit_ValueChanged);
             // 
             // TimeScaleEdit
             // 
@@ -132,7 +148,6 @@ namespace MiniUnity_Cannon_DesktopApp
             0,
             0,
             0});
-            this.TimeScaleEdit.ValueChanged += new System.EventHandler(this.TimeScaleEdit_ValueChanged);
             // 
             // ScaleLabel
             // 
@@ -156,7 +171,6 @@ namespace MiniUnity_Cannon_DesktopApp
             0,
             0,
             0});
-            this.FramePerSecEdit.ValueChanged += new System.EventHandler(this.FramePerSecEdit_ValueChanged);
             // 
             // TimeScaleLabel
             // 
@@ -204,7 +218,6 @@ namespace MiniUnity_Cannon_DesktopApp
             0,
             0,
             0});
-            this.AngleEdit.ValueChanged += new System.EventHandler(this.AngleEdit_ValueChanged);
             // 
             // AngleLabel
             // 
@@ -234,7 +247,6 @@ namespace MiniUnity_Cannon_DesktopApp
             0,
             0,
             0});
-            this.VelocityEdit.ValueChanged += new System.EventHandler(this.VelocityEdit_ValueChanged);
             // 
             // VelocityLabel
             // 
@@ -261,7 +273,18 @@ namespace MiniUnity_Cannon_DesktopApp
             this.GameCanvasPanel.Name = "GameCanvasPanel";
             this.GameCanvasPanel.Size = new System.Drawing.Size(937, 674);
             this.GameCanvasPanel.TabIndex = 2;
-            //this.GameCanvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GameCanvasPanel_Paint);
+            // 
+            // VelocityTrackBar1
+            // 
+            this.VelocityTrackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.VelocityTrackBar1.LargeChange = 10;
+            this.VelocityTrackBar1.Location = new System.Drawing.Point(12, 231);
+            this.VelocityTrackBar1.Maximum = 500;
+            this.VelocityTrackBar1.Name = "VelocityTrackBar1";
+            this.VelocityTrackBar1.Size = new System.Drawing.Size(141, 42);
+            this.VelocityTrackBar1.TabIndex = 7;
+            this.VelocityTrackBar1.Value = 50;
             // 
             // MainForm
             // 
@@ -283,6 +306,7 @@ namespace MiniUnity_Cannon_DesktopApp
             ((System.ComponentModel.ISupportInitialize)(this.FramePerSecEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AngleEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VelocityEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VelocityTrackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -305,6 +329,8 @@ namespace MiniUnity_Cannon_DesktopApp
         private System.Windows.Forms.CheckBox PlaySoundCheckBox;
         private System.Windows.Forms.NumericUpDown ScaleEdit;
         private System.Windows.Forms.Label ScaleLabel;
+        private System.Windows.Forms.ProgressBar VelocityProgressBar1;
+        private System.Windows.Forms.TrackBar VelocityTrackBar1;
     }
 }
 
