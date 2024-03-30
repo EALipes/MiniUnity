@@ -11,8 +11,13 @@ using System.Windows.Forms;
 //using MiniUnity_Cannon_DesktopApp.Annotations;
 
 using MiniUnity.CannonGame;
+using MiniUnity_CannonGame;
 using MiniUnity_Cannon_DesktopApp.Properties;
 
+
+namespace MiniUnity_CannonGame
+{
+}
 
 namespace MiniUnity_Cannon_DesktopApp
 {
@@ -64,6 +69,10 @@ namespace MiniUnity_Cannon_DesktopApp
             formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             VelocityTrackBar1.DataBindings.Add(b3);
 
+            Binding bA = new Binding("Value", gameParams, "Angle",
+            formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
+            AngleEdit.DataBindings.Add(bA);
+
             Binding bTS = new Binding("Value", gameParams, "TimeScale",
                 formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             this.TimeScaleEdit.DataBindings.Add(bTS); //ValueChanged += new System.EventHandler(this.TimeScaleEdit_ValueChanged);
@@ -88,16 +97,7 @@ namespace MiniUnity_Cannon_DesktopApp
         #region Параметры игры
         private readonly GameParameters gameParams;
 
-        // Возможно, это даже стоит отправить в сам GameSettings - потому что будет использоваться не только с этой формой
-        private void SetGameSettings()
-        {
-            game.Angle = gameParams.Angle;
-            game.Velocity = gameParams.Speed;
-            game.FramesPerSec = gameParams.FramesPerSec;
-            game.Orchestrator.Clock.GameTimeScale = gameParams.TimeScale;
-            game.PlaySound = gameParams.PlaySound;
-            game.ScreenScale = gameParams.GameScreenScale;
-        }
+        
 
         #endregion
 
@@ -121,6 +121,17 @@ namespace MiniUnity_Cannon_DesktopApp
             get { return gameParams; }
         }
 
+        public CannonGame Game
+        {
+            set { game = value; }
+            get { return game; }
+        }
+
+        public GameParameters GameParams1
+        {
+            get { return gameParams; }
+        }
+
         private DateTime ProjectileFlightStartTime;
 
         #endregion
@@ -129,7 +140,7 @@ namespace MiniUnity_Cannon_DesktopApp
         private void RunButton_Click(object sender, EventArgs e)
         {
             ControlPanel.Enabled = false;
-            SetGameSettings();
+            GameParams.SetGameSettings(game);
             try
             {
                 game.Play();
@@ -266,144 +277,6 @@ namespace MiniUnity_Cannon_DesktopApp
         #endregion
     }
 
-
-    /// <summary>
-    /// Структура для передачи параметров игры
-    /// </summary>
-    public class GameParameters : INotifyPropertyChanged
-    {
-        public GameParameters()
-        {
-        }
-
-        public int FramesPerSec
-        {
-            get { return _framesPerSec; }
-
-            set
-            {
-                _framesPerSec = value;
-                OnPropertyChanged("FramesPerSec");
-            }
-        }
-        private int _framesPerSec = 25;
-
-        public float TimeScale
-        {
-            get
-            {
-                return _timeScale;
-            }
-
-            set
-            {
-                _timeScale = value;
-                OnPropertyChanged("TimeScale");
-            }
-        }
-        private float _timeScale = 1;
-
-        public bool PlaySound
-        {
-            get
-            {
-                return _playSound;
-            }
-
-            set
-            {
-                _playSound = value;
-                OnPropertyChanged("PlaySound");
-            }
-        }
-        private bool _playSound = true;
-
-        /// <summary>
-        /// Масштаб изображения - метров в сантиметре экрана
-        /// </summary>
-        public float GameScreenScale
-        {
-            get
-            {
-                return _gameScreenScale;
-            }
-
-            set
-            {
-                _gameScreenScale = value;
-                OnPropertyChanged("GameScreenScale");
-            }
-        }
-        private float _gameScreenScale = 100.0f;
-
-        public float Speed
-        {
-            get
-            {
-                return _speed;
-            }
-
-            set
-            {
-                _speed = value;
-                OnPropertyChanged("Speed");
-            }
-        }
-        private float _speed = 100;
-
-        public float Angle
-        {
-            get
-            {
-                return _angle;
-            }
-
-            set
-            {
-                _angle = value;
-                OnPropertyChanged("Angle");
-            }
-        }
-        private float _angle = 45;
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        //[NotifyPropertyChangedInvocator]
-        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        protected virtual void OnPropertyChanged(string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-    }
-
-
-
-    //public interface INotifyPropertyChanged
-    //{
-    //    /// <summary>Occurs when a property value changes.</summary>
-    //    event PropertyChangedEventHandler PropertyChanged;
-    //}
-
-    //public delegate void PropertyChangedEventHandler(object sender, PropertyChangedEventArgs e);
-
-    //public class PropertyChangedEventArgs : EventArgs
-    //{
-    //    public virtual string PropertyName
-    //    {
-    //       get 
-    //       {
-    //            return this.propertyName;
-    //       }
-    //    }
-    //    private readonly string propertyName;
-
-    //    public PropertyChangedEventArgs(string propertyName)
-    //    {
-    //        this.propertyName = propertyName;
-    //    }
-    //}
 
 
 }
