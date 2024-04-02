@@ -41,6 +41,7 @@ namespace MiniUnity_Cannon_ConsoleApp
         private static bool PromptToRepeat(string prompt)
         {
             Console.WriteLine(prompt);
+            //if (Console.KeyAvailable)
             var s = Console.ReadKey();
             var repeat = (s.KeyChar == 'y') | (s.KeyChar == 'Y') | (s.KeyChar == 'Д') | (s.KeyChar == 'д') |
                          (s.Key == ConsoleKey.Enter);

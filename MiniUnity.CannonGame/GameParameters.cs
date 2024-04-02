@@ -3,7 +3,7 @@ using MiniUnity.CannonGame;
 
 //using MiniUnity_Cannon_DesktopApp;
 
-namespace MiniUnity_CannonGame
+namespace MiniUnity.CannonGame
 {
     /// <summary>
     /// Структура для передачи параметров игры

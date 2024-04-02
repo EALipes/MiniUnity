@@ -11,13 +11,9 @@ using System.Windows.Forms;
 //using MiniUnity_Cannon_DesktopApp.Annotations;
 
 using MiniUnity.CannonGame;
-using MiniUnity_CannonGame;
+//using MiniUnity_CannonGame;
 using MiniUnity_Cannon_DesktopApp.Properties;
 
-
-namespace MiniUnity_CannonGame
-{
-}
 
 namespace MiniUnity_Cannon_DesktopApp
 {
@@ -102,9 +98,6 @@ namespace MiniUnity_Cannon_DesktopApp
         #endregion
 
         #region Объекты игры
-        // Ядро
-        //protected Projectile projectile;
-
         protected CannonGame game;
 
         #endregion
@@ -144,7 +137,7 @@ namespace MiniUnity_Cannon_DesktopApp
             try
             {
                 game.Play();
-                new SoundPlayer(Resources.ProjectileFall3).Play();
+                new SoundPlayer( Resources.ProjectileFall3).Play();
             }
             finally
             {
