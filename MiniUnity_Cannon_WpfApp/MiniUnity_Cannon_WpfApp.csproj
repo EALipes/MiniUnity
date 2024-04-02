@@ -94,5 +94,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MiniUnity.CannonGame\MiniUnity.CannonGame.csproj">
+      <Project>{cf23e177-3d54-4898-b020-a73c1b2529f8}</Project>
+      <Name>MiniUnity.CannonGame</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MiniUnity\MiniUnity.csproj">
+      <Project>{0c4ac688-838f-414e-bf31-741739a8177d}</Project>
+      <Name>MiniUnity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

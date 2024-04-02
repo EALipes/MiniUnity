@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:MiniUnity_Cannon_WpfApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="ControlsColumn" Width="Auto"/>
+            <ColumnDefinition x:Name="GameColumn"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="6,6,6,6" VerticalAlignment="Top" MinWidth="70">
+            <Label Name="VelocityLabel" Content="Скорость" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            <TextBox Name="VelocityEdit" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <Slider Name="VelocitySlider" />
+            <Label Name="AngleLabel" Content="Угол" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            <TextBox Name="AngleEdit" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <Slider Name="AngleSlider" />
+            <Button Name="RunBtn" Content="Пли!" Click="RunBtn_Click"/>
+        </StackPanel>
+        <GridSplitter Width="5"></GridSplitter>
+        <Canvas Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>
