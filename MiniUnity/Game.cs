@@ -41,7 +41,7 @@ namespace MiniUnity
             }
         }
 
-        protected Scene scene { get; set; }
+        protected Scene scene;
 
 
 
