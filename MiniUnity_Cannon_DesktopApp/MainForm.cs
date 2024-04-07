@@ -136,16 +136,7 @@ namespace MiniUnity_Cannon_DesktopApp
             GameParams.SetGameSettings(game);
             try
             {
-                // Звук выстрела (действие начинается после его окончания)
-                //if (game.PlaySound)
-                //    //SoundPlayerGunFired.Play();
-                //    new SoundPlayer( Resources.CannonFiredAndProjectileFlies).Play();
-                //SoundPlayerGunFired.PlaySync();
-
                 game.Play();
-
-                if (game.PlaySound)
-                new SoundPlayer( Resources.ProjectileFall3).Play();
             }
             finally
             {

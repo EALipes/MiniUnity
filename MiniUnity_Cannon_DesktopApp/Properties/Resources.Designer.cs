@@ -59,32 +59,5 @@ namespace MiniUnity_Cannon_DesktopApp.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream CannonFired {
-            get {
-                return ResourceManager.GetStream("CannonFired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream CannonFiredAndProjectileFlies {
-            get {
-                return ResourceManager.GetStream("CannonFiredAndProjectileFlies", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ProjectileFall3 {
-            get {
-                return ResourceManager.GetStream("ProjectileFall3", resourceCulture);
-            }
-        }
     }
 }

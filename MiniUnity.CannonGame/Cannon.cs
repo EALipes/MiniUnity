@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Media;
 using System.Numerics;
 
@@ -89,5 +91,65 @@ namespace MiniUnity.CannonGame
         public float ElevationAngle { get; set; }
 
         public Projectile Projectile { get; set; }
+
+
+        #region Отрисовка пушки
+
+        /// <summary>
+        /// Функция отрисовки пушки средствами WinForms
+        /// </summary>
+        /// <param name="graphics"></param>
+        public void Draw_PaintOnWinForms(Graphics graphics)
+        {
+            try
+            {
+                Pen bluePen = new Pen(Color.Blue, 3);
+                Brush blueBrush = new SolidBrush(Color.Blue);
+                Pen redPen = new Pen(Color.Red, 2);
+                Pen blackPen = new Pen(Color.Black);
+                Brush blackBrush = new SolidBrush(Color.Black);
+
+                // Масштаб экрана - в мм
+                graphics.PageUnit = GraphicsUnit.Millimeter;
+
+                var cannonDiameter = 5;
+                var cannonLength = 20;
+                // координаты ядра (в метрах)
+                var prX = (float) Position.X;
+                var prY = (float) Position.Y;
+                // отмасштабируем эти координаты, чтоб все вместилось в экран
+                // масштаб мы задаем в метрах на сантиметр, а экран у нас меряется в миллиметрах (GraphicsUnit.Millimeter)
+                prX = prX * 10 / Game.ScreenScale;
+                prY = prY * 10 / Game.ScreenScale;
+                // учтем, что началом координаты Y у нас должен быть конец (нижний) экрана
+                // и что координата Y в игре направлена вверх, а у нас на экране - вниз
+                var screenHeight = graphics.VisibleClipBounds.Height;
+                var screenX = prX;
+                var screenY = screenHeight - cannonDiameter - prY;
+                // если вышли за пределы экрана - не рисуем
+                if ((screenX < 0) || (screenX > graphics.VisibleClipBounds.Width) || (screenY < 0) ||
+                    (screenY > graphics.VisibleClipBounds.Height))
+                {
+                    return;
+                }
+
+                Rectangle r = new Rectangle((int) screenX, (int) screenY, cannonLength, cannonDiameter);
+                graphics.Transform.Rotate(-Game.Angle);
+                graphics.DrawRectangle(blackPen, r);
+                graphics.FillRectangle(blueBrush, r);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Ошибка отрисовки");
+                Debug.WriteLine(e.GetType().Name);
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e.Source);
+                Debug.WriteLine(e.StackTrace);
+            }
+
+        }
+        
+
+        #endregion
     }
 }
