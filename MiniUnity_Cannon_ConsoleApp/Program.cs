@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MiniUnity;
 using MiniUnity.CannonGame;
-using MiniUnity_CannonGame;
+//using MiniUnity_CannonGame;
 
 namespace MiniUnity_Cannon_ConsoleApp
 {

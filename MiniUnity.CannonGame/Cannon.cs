@@ -1,37 +1,68 @@
 ﻿using System;
+using System.Media;
 using System.Numerics;
 
 namespace MiniUnity.CannonGame
 {
     public class Cannon: GameObject
     {
-        public Vector3 Position = new Vector3();
-        //public Point Position = new Point();
+        protected CannonGame Game { get; set; }
+        protected CannonScene Scene { get; set; }
 
+        public Vector3 Position { get; set; } = new Vector3();
+
+        protected SoundPlayer cannonFiresSoundPlayer;
+
+        public Cannon()
+        {
+            cannonFiresSoundPlayer = new SoundPlayer();
+            cannonFiresSoundPlayer.Stream = Resources.CannonFired;
+            cannonFiresSoundPlayer.Load();
+        }
+
+        public override void Start()
+        {
+            //Game = GetParentComponent<Game>() as Game;
+            Game = GetParentComponent<CannonGame>() as CannonGame;
+            if (Game==null) 
+                throw new NullReferenceException("Не найден объект игры");
+            Scene=GetParentComponent<CannonScene>() as CannonScene;
+            if (Scene==null) 
+                throw new NullReferenceException("Не найден объект сцены");
+            base.Start();
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="projectile">Снаряд, которым будем стрелять</param>
         /// <param name="elevationAngle">Угол возвышения в градусах</param>
-        /// <param name="velocity">Скорость снаряда</param>
-        public void Fire(Projectile projectile, float elevationAngle, float velocity)
+        /// <param name="velocityScalar">Скорость снаряда</param>
+        public void Fire(Projectile projectile, float elevationAngle, float velocityScalar)
         {
-            // Отрисовываем снаряд на месте пуска
-            projectile.Update();
+            if (Game.PlaySound)
+                //SoundPlayerGunFired.Play();
+                //new SoundPlayer( Resources.CannonFiredAndProjectileFlies).Play();
+                cannonFiresSoundPlayer.PlaySync();
 
-            projectile.Fallen = false;
-            //projectile
-            // TODO! Вывод поправить, сделать в зависимости от типа приложения.
+            projectile.Fired(elevationAngle, velocityScalar);
+
+            //// Отрисовываем снаряд на месте пуска
+            //projectile.Update();
+
+            //projectile.Fallen = false;
+            ////projectile
+            //// TODO! Вывод поправить, сделать в зависимости от типа приложения.
             Console.WriteLine("Бабах!");
 
-            projectile.Position.X = Position.X;
-            projectile.Position.Y = Position.Y;
+            projectile.Position = Position;
 
-            var elevationAngleInRadians = elevationAngle * Math.PI / 180;
+            //var elevationAngleInRadians = elevationAngle * Math.PI / 180;
 
-            projectile.Velocity.X = (float) (velocity * Math.Cos(elevationAngleInRadians));
-            projectile.Velocity.Y = (float) (velocity * Math.Sin(elevationAngleInRadians));
+            //var velocity = projectile.Velocity;
+            //velocity.X = (float) (velocityScalar * Math.Cos(elevationAngleInRadians));
+            //velocity.Y = (float) (velocityScalar * Math.Sin(elevationAngleInRadians));
+            //projectile.Velocity = velocity;
         }
 
         public void Fire()
@@ -52,6 +83,7 @@ namespace MiniUnity.CannonGame
             ElevationAngle = elevationAngle;
             Velocity = velocity;
         }
+        
         public float Velocity { get; set; }
 
         public float ElevationAngle { get; set; }

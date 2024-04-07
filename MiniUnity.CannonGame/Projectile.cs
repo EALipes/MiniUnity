@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Media;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -8,21 +9,31 @@ namespace MiniUnity.CannonGame
 {
     public class Projectile: GameObject
     {
-        protected CannonGame Game;
-        protected CannonScene Scene;
+        protected CannonGame Game { get; set; }
+        protected CannonScene Scene { get; set; }
 
         // Может быть, перенести в GameObject?
         // Или в GameObject.Render?
         // Положение снаряда
-        public Vector3 Position = new Vector3();
+        public Vector3 Position { get; set; } = new Vector3();
 
         // Скорость снаряда
-        public Vector3 Velocity = new Vector3();
+        public Vector3 Velocity { get; set; } = new Vector3();
 
         // Отметим момент падения и перестанем сообщать о ранее упавшем снаряде
-        public bool Fallen = false;
+        public bool Fallen { get; set; } = false;
 
         private float time = 0;
+
+        protected SoundPlayer projectileFliesSoundPlayer;
+        protected SoundPlayer projectileFallSoundPlayer;
+
+        public Projectile()
+        {
+            projectileFliesSoundPlayer = new SoundPlayer(Resources.ProjectileFlight);
+            projectileFallSoundPlayer = new SoundPlayer(Resources.ProjectileFall);
+            
+        }
 
         public override void Start()
         {
@@ -33,9 +44,10 @@ namespace MiniUnity.CannonGame
             Scene=GetParentComponent<CannonScene>() as CannonScene;
             if (Scene==null) 
                 throw new NullReferenceException("Не найден объект сцены");
-            time = 0;
+            //time = 0;
             base.Start();
         }
+
 
         public override void Update()
         {
@@ -51,11 +63,14 @@ namespace MiniUnity.CannonGame
             //float dVY2 = G * 1 / CannonGame.CannonGameFramesPerSecond;
 
             // Отрабатываем изменение положения; положение по Y меняется ускоренно.
-            Position.X = Position.X + Velocity.X * dT;
-            Position.Y = Position.Y + (Velocity.Y + dVY/2) * dT ;
+            var X = Position.X + Velocity.X * dT;
+            var Y = Position.Y + (Velocity.Y + dVY/2) * dT ;
+            Position = new Vector3(X, Y, 0);
 
             // Отрабатываем изменение скорости
-            Velocity.Y = Velocity.Y + dVY;
+            var velocity = Velocity;
+            velocity.Y = Velocity.Y + dVY;
+            Velocity = velocity;
 
             // Выводим данные о положении снаряда
             //Console.WriteLine(DateTime.Now.Minute+":"+DateTime.Now.Second+"."+DateTime.Now.Millisecond);
@@ -74,11 +89,40 @@ namespace MiniUnity.CannonGame
             RefreshScreen();
         }
 
+
+        public void Fired(float elevationAngle, float velocityScalar)
+        {
+            // Включаем звук
+            if (Game.PlaySound)
+                projectileFliesSoundPlayer.PlayLooping();
+            //projectileFliesSoundPlayer.Play();
+
+            time = 0;
+
+            // Отрисовываем снаряд на месте пуска
+            Update();
+
+            Fallen = false;
+
+            var elevationAngleInRadians = elevationAngle * Math.PI / 180;
+
+            var velocity = Velocity;
+            velocity.X = (float) (velocityScalar * Math.Cos(elevationAngleInRadians));
+            velocity.Y = (float) (velocityScalar * Math.Sin(elevationAngleInRadians));
+            Velocity = velocity;
+        }
+
         private void Fall()
         {
-            Position.Y = 0;
-            Velocity.X = 0;
-            Velocity.Y = 0;
+            if (Game.PlaySound)
+                projectileFallSoundPlayer.Play();
+
+
+            var position = Position;
+            position.Y = 0;
+            Position = position;
+            Velocity=Vector3.Zero;
+
             //TODO! Убрать использование Console и сделать обобщенно
             Console.WriteLine("Шлёп!");
             Fallen = true;
