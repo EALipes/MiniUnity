@@ -11,7 +11,7 @@
             <ColumnDefinition x:Name="ControlsColumn" Width="Auto"/>
             <ColumnDefinition x:Name="GameColumn"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="6,6,6,6" VerticalAlignment="Top" MinWidth="70">
+        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="6,6,6,6" VerticalAlignment="Top" MinWidth="120">
             <Label Name="VelocityLabel" Content="Скорость" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
             <TextBox Name="VelocityEdit" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
             <Slider Name="VelocitySlider" />
@@ -21,6 +21,32 @@
             <Button Name="RunBtn" Content="Пли!" Click="RunBtn_Click"/>
         </StackPanel>
         <GridSplitter Width="5"></GridSplitter>
-        <Canvas Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Grid Grid.Column="1" x:Name="GameCanvasGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0,1">
+
+
+            <Canvas x:Name="GameCanvas">
+                <!--<Rectangle x:Name="CannonRect"  Canvas.Top="{Binding ActualHeight, ElementName=GameCanvas, Mode=OneWay}" Fill="Black" Width="30" Height="10" HorizontalAlignment="Left" VerticalAlignment="Bottom"  >
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform x:Name="RotateTransform" Angle="-45"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <Ellipse x:Name="ProjectileEllipse" Fill="Blue" Height="10" Width="10" Canvas.Top="300" Canvas.Left="50" HorizontalAlignment="Left" VerticalAlignment="Bottom"  >
+                </Ellipse>-->
+
+                <Image x:Name="Image1">
+                </Image>
+
+            </Canvas>
+
+            
+
+
+
+        </Grid>
     </Grid>
 </Window>
