@@ -111,6 +111,40 @@ namespace MiniUnity_Cannon_ConsoleApp
             var fps = ReadValue("Кадров в секунду:", gameParams.FramesPerSec);
             gameParams.FramesPerSec = (int)fps;
         }
+
+
+        //private static void CheckKeyboardCommands()
+/*
+        private static void CheckKeyboardCommands()
+        {
+            if (Console.KeyAvailable)
+            {
+                var key = Console.ReadKey();
+                if (key.KeyChar == ' ')
+                    // пуск-стоп
+                {
+                    //IsStopped = !IsStopped;
+                    if (!Game.Orchestrator.Stopped) 
+                        Game.Orchestrator.Stop();
+                    else
+                        Game.Orchestrator.Resume();
+                }
+
+                if (
+                    key.Key == ConsoleKey.Escape
+                    ||
+                    (key.KeyChar == 'x')||(key.KeyChar == 'X')||(key.KeyChar == 'ч')||(key.KeyChar == 'Ч')
+                )
+
+                {
+                    // Esc - выход из игры
+                    // Пока просто указываем флаг завершения сцены
+                    IsOver = true;
+                }
+            }
+        }
+    }
+*/
     }
 
 

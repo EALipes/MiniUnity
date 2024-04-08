@@ -86,8 +86,14 @@ namespace MiniUnity.CannonGame
             Velocity = velocity;
         }
         
+        /// <summary>
+        /// Скорость снаряда
+        /// </summary>
         public float Velocity { get; set; }
 
+        /// <summary>
+        /// Угол возвышения (в градусах)
+        /// </summary>
         public float ElevationAngle { get; set; }
 
         public Projectile Projectile { get; set; }
@@ -134,7 +140,8 @@ namespace MiniUnity.CannonGame
                 }
 
                 Rectangle r = new Rectangle((int) screenX, (int) screenY, cannonLength, cannonDiameter);
-                graphics.Transform.Rotate(-Game.Angle);
+                // В графике положительный угол почему-то считается по часовой стрелке, а не влево, как в математике.
+                graphics.Transform.Rotate(-ElevationAngle);
                 graphics.DrawRectangle(blackPen, r);
                 graphics.FillRectangle(blueBrush, r);
             }
