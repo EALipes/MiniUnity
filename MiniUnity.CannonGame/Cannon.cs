@@ -34,8 +34,7 @@ namespace MiniUnity.CannonGame
             base.Start();
         }
 
-        /// <summary>
-        /// 
+        /// <summary> 
         /// </summary>
         /// <param name="projectile">Снаряд, которым будем стрелять</param>
         /// <param name="elevationAngle">Угол возвышения в градусах</param>
@@ -72,8 +71,7 @@ namespace MiniUnity.CannonGame
             Fire(Projectile, ElevationAngle, Velocity);
         }
 
-        /// <summary>
-        /// 
+        /// <summary> 
         /// </summary>
         /// <param name="projectile">Снаряд, которым будем стрелять</param>
         /// <param name="elevationAngle">Угол возвышения в градусах</param>
@@ -86,13 +84,11 @@ namespace MiniUnity.CannonGame
             Velocity = velocity;
         }
         
-        /// <summary>
-        /// Скорость снаряда
+        /// <summary> Скорость снаряда
         /// </summary>
         public float Velocity { get; set; }
 
-        /// <summary>
-        /// Угол возвышения (в градусах)
+        /// <summary> Угол возвышения (в градусах)
         /// </summary>
         public float ElevationAngle { get; set; }
 
@@ -101,8 +97,7 @@ namespace MiniUnity.CannonGame
 
         #region Отрисовка пушки
 
-        /// <summary>
-        /// Функция отрисовки пушки средствами WinForms
+        /// <summary> Функция отрисовки пушки средствами WinForms
         /// </summary>
         /// <param name="graphics"></param>
         public void Draw_PaintOnWinForms(Graphics graphics)

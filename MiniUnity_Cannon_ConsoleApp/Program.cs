@@ -10,8 +10,7 @@ using MiniUnity.CannonGame;
 
 namespace MiniUnity_Cannon_ConsoleApp
 {
-    /// <summary>
-    /// Программа игры "Пушка".
+    /// <summary> Программа игры "Пушка".
     /// Моделирует стрельбу из пушки и полет выпущенного снаряда.
     /// </summary>
     class Program
@@ -49,8 +48,7 @@ namespace MiniUnity_Cannon_ConsoleApp
             return false;
         }
 
-        /// <summary>
-        /// Служебная функция - читаем число с экрана.
+        /// <summary> Служебная функция - читаем число с экрана.
         /// </summary>
         /// <param name="prompt"></param>
         /// <returns></returns>
@@ -72,8 +70,7 @@ namespace MiniUnity_Cannon_ConsoleApp
             }
         }
 
-        /// <summary>
-        /// Вывод параметров игры
+        /// <summary> Вывод параметров игры
         /// </summary>
         /// <param name="gameParams"> </param>
         public static void ShowGameSettings(GameParameters gameParams)

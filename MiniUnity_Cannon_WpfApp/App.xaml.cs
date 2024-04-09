@@ -8,8 +8,7 @@ using System.Windows;
 
 namespace MiniUnity_Cannon_WpfApp
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
+    /// <summary> Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {

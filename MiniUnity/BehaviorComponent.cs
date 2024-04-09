@@ -1,7 +1,6 @@
 ﻿namespace MiniUnity
 {
-    /// <summary>
-    /// Компонент поведения.
+    /// <summary> Компонент поведения.
     /// Для каждой "стороны" поведения объекта можно задавать свой компонент.
     /// Шаблон проектирования «Компонент» (Component) был формализован в 1994 году, 
     /// в книге «Design Patterns: Elements of Reusable Object-Oriented Software», 

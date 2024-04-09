@@ -148,8 +148,7 @@ namespace MiniUnity_Cannon_DesktopApp
 
         #region Отрисовка
         
-        /// <summary>
-        /// При вызове обновления экрана из игры должно вызываться вот это.
+        /// <summary> При вызове обновления экрана из игры должно вызываться вот это.
         /// </summary>
         //TODO! По идее, это надо делать на уровне настроек игры на платформу.
         private void CallScreenRefresh()

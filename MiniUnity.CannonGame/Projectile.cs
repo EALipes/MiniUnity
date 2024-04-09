@@ -130,15 +130,16 @@ namespace MiniUnity.CannonGame
         }
 
 
-        #region Отрисовка ядра
+        #region Отрисовка
 
         // * 1. Вызов из игры обновления экрана
         
         // Вероятно, это надо будет просто поставить в конце Scene.Update
-        public void RefreshScreen()
-        {
-            if (OnCallScreenRefresh != null) OnCallScreenRefresh();
-        }
+        //public void RefreshScreen()
+        ////TODO! Заменено на GameObject.RefreshDraw()
+        //{
+        //    if (OnCallScreenRefresh != null) OnCallScreenRefresh();
+        //}
 
         // Вызовы обновления на разных платформах
 
@@ -164,8 +165,7 @@ namespace MiniUnity.CannonGame
         // * 2. Отрисовка - вызывается из приложения, в котором работает игра
 
 
-        /// <summary>
-        /// Отрисовка ядра средствами консоли
+        /// <summary> Отрисовка ядра средствами консоли
         /// </summary>
         public void Draw_WriteToConsole()
         {
@@ -173,8 +173,7 @@ namespace MiniUnity.CannonGame
             //Console.WriteLine("t="+time + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
         }
 
-        /// <summary>
-        /// Функция отрисовки ядра средствами WinForms - в формате события, вызываемого компонентом формы
+        /// <summary> Функция отрисовки ядра средствами WinForms - в формате события, вызываемого компонентом формы
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -183,8 +182,7 @@ namespace MiniUnity.CannonGame
             Draw_PaintOnWinForms(e.Graphics);
         }
 
-        /// <summary>
-        /// Функция отрисовки ядра средствами WinForms
+        /// <summary> Функция отрисовки ядра средствами WinForms
         /// </summary>
         /// <param name="graphics"></param>
         public void Draw_PaintOnWinForms(Graphics graphics)

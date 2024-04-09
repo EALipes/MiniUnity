@@ -3,8 +3,7 @@ using System.Threading;
 
 namespace MiniUnity
 {
-    /// <summary>
-    /// Дирижер обновлений. 
+    /// <summary> Дирижер обновлений. 
     /// Отвечает за ход времени в игре, вызов обновлений и т.п.
     /// </summary>
     /// <remarks>
@@ -28,13 +27,11 @@ namespace MiniUnity
             Clock = new Clock();
         }
 
-        /// <summary>
-        /// Часы - отражают игровое время
+        /// <summary> Часы - отражают игровое время
         /// </summary>
         public IClock Clock { get; set; }
 
-        /// <summary>
-        /// Текущее игровое время
+        /// <summary> Текущее игровое время
         /// </summary>
         /// <returns></returns>
         public DateTime Now()
@@ -52,27 +49,22 @@ namespace MiniUnity
             TimeDeltaFromLastUpdateInSeconds = 0;
         }
 
-        /// <summary>
-        /// Момент предыдущего обновления (в игровом времени)
+        /// <summary> Момент предыдущего обновления (в игровом времени)
         /// </summary>
         public DateTime LastUpdateTime { get; protected set; }
         
-        /// <summary>
-        /// Момент вызова текущего обновления (в игровом времени)
+        /// <summary> Момент вызова текущего обновления (в игровом времени)
         /// </summary>
         public DateTime CurrentUpdateTime { get; protected set; }
 
-        /// <summary>
-        /// Промежуток времени, прошедший с предыдущего обновления
+        /// <summary> Промежуток времени, прошедший с предыдущего обновления
         /// </summary>
         public TimeSpan TimeDeltaFromLastUpdate { get; protected set; }
-        /// <summary>
-        /// Промежуток времени, прошедший с предыдущего обновления - в секундах
+        /// <summary> Промежуток времени, прошедший с предыдущего обновления - в секундах
         /// </summary>
         public float TimeDeltaFromLastUpdateInSeconds { get; protected set; }
 
-        /// <summary>
-        /// Масштаб времени - игровых секунд за реальную секунду
+        /// <summary> Масштаб времени - игровых секунд за реальную секунду
         /// </summary>
         public float GameTimeScale
         {
@@ -85,16 +77,14 @@ namespace MiniUnity
 
 
         #region Пуск/останов часов
-        /// <summary>
-        /// Остановить игровое время
+        /// <summary> Остановить игровое время
         /// </summary>
         public void Stop()
         {
             Clock.Stop();
         }
 
-        /// <summary>
-        /// Запустить отсчет времени дальше
+        /// <summary> Запустить отсчет времени дальше
         /// </summary>
         public void Resume()
         {
@@ -116,8 +106,7 @@ namespace MiniUnity
             TimeDeltaFromLastUpdateInSeconds = 0;
         }
 
-        /// <summary>
-        /// Вызвать обновления всех объектов игры
+        /// <summary> Вызвать обновления всех объектов игры
         /// </summary>
         /// <remarks>
         /// Поскольку объект существует в игре в готовом виде, то вызов обновлений других объектов привязывается к нему через событие OnUpdate().
@@ -144,21 +133,18 @@ namespace MiniUnity
         }
 
         
-        /// <summary>
-        /// Событие обновления.
+        /// <summary> Событие обновления.
         /// Для вызова обновлений игровые объекты подписываются на это событие, прицепляя к нему свои процедуры обновления.
         /// </summary>
         public event Action OnUpdate;
 
 
-        /// <summary>
-        /// Частота вызова обновлений - кадров в секунду
+        /// <summary> Частота вызова обновлений - кадров в секунду
         /// </summary>
         public int FramesPerSec { get; set; }
 
 
-        /// <summary>
-        /// Цикл обновления объектов игры.
+        /// <summary> Цикл обновления объектов игры.
         /// Вызывается из игры.
         /// </summary>
         /// <remarks>

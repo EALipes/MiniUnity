@@ -2,6 +2,13 @@
 using System.ComponentModel;
 using System.Data;
 
+
+// для отрисовки в Windows.Forms
+using System.Windows.Forms;
+
+// для отрисовки в WPF
+using System.Windows.Controls;
+
 namespace MiniUnity
 {
 
@@ -18,8 +25,7 @@ namespace MiniUnity
         public bool IsOver { get; set; } //= false;
 
 
-        /// <summary>
-        /// В игре, наверное, должна быть хотя бы одна сцена.
+        /// <summary> В игре, наверное, должна быть хотя бы одна сцена.
         /// Вероятно, дальше сделаем список сцен - но пока мне не очевидно, как с ними работать. Оставим на потом.
         /// </summary>
         protected Scene Scene
@@ -77,8 +83,7 @@ namespace MiniUnity
             base.Start();
         }
 
-        /// <summary>
-        /// Собственно, выполнение игры.
+        /// <summary> Собственно, выполнение игры.
         /// </summary>
         /// <remarks>
         /// Пока непонятно, как это надо будет делать.
@@ -116,6 +121,78 @@ namespace MiniUnity
         {
             Play(this, Scene);
         }
+
+
+        #region Отрисовка
+
+        #region Winforms
+
+        /// <summary> Панель или др. видимый элемент, на котором будет отображаться графика игры
+        /// </summary>
+        protected System.Windows.Forms.Control GamePanel 
+        {
+            get
+            {
+                return _gamePanel;
+
+            }
+            set
+            {
+                if (_gamePanel != null)
+                    _gamePanel.Paint -= Draw_OnWinFormsPaintEvent;
+                _gamePanel = value;
+                if (_gamePanel != null)
+                    _gamePanel.Paint += Draw_OnWinFormsPaintEvent;
+            }
+        }
+        private System.Windows.Forms.Control _gamePanel;
+        #endregion
+
+        #region WPF
+        protected System.Windows.Controls.Panel GameGrid
+        //protected System.Windows.Controls.Grid GameGrid { get; set; }
+        {
+            get
+            {
+                return _gameGrid;
+
+            }
+            set
+            {
+                //if (_gameGrid != null)
+                //    _gameGrid.Paint -= Draw_OnWPFPaintEvent;
+                _gameGrid = value;
+                //if (_gameGrid != null)
+                //    _gameGrid.Paint += Draw_OnWPFPaintEvent;
+            }
+        }
+        private System.Windows.Controls.Panel _gameGrid;
+
+        #endregion
+
+        public override void RefreshDraw()
+        {
+            if (AppType == ApplicationType.ConsoleApp)
+            {
+                // Просто отрисовываем объекты
+                Draw();
+            }
+            else if (AppType == ApplicationType.WinFormsApp)
+            {
+                // Даем команду перерисовать панель игры
+                if (GamePanel != null)
+                    GamePanel.Refresh();
+            }
+            else if (AppType == ApplicationType.WpfApp)
+            {
+                if (GameGrid != null)
+                {
+                    //GameGrid.Refresh();
+                }
+            }
+        }
+
+        #endregion
 
     }
 }

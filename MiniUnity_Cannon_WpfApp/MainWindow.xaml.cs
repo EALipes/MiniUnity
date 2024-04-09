@@ -22,8 +22,7 @@ using MiniUnity.CannonGame;
 
 namespace MiniUnity_Cannon_WpfApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// <summary> Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -79,8 +78,7 @@ namespace MiniUnity_Cannon_WpfApp
             }
         }
 
-        /// <summary>
-        /// Отрисовка пушки и ядра
+        /// <summary> Отрисовка пушки и ядра
         /// </summary>
         private void CallScreenRefresh()
         {

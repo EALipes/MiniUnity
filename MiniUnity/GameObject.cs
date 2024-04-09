@@ -1,28 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace MiniUnity
 {
-    /// <summary>
-    /// Основной класс для всех объектов, из которых строится игра
+    /// <summary> Основной класс для всех объектов, из которых строится игра
     /// </summary>
     public class GameObject
     {
 
-        /// <summary>
-        /// Родительский объект
+        /// <summary> Родительский объект
         /// </summary>
         public GameObject Parent { get; set; }
 
-        /// <summary>
-        /// Вложенные объекты, подчиняющиеся текущему
+        /// <summary> Вложенные объекты, подчиняющиеся текущему
         /// </summary>
         protected List<GameObject> Children = new List<GameObject>();
 
         #region // Функции добавления и поиска объектов
 
-        /// <summary>
-        /// Найти в родителях
+        /// <summary> Найти в родителях
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -52,8 +50,7 @@ namespace MiniUnity
             gameObject.Parent = null;
         }
 
-        /// <summary>
-        /// Найти в подчиненных объектах объект указанного типа (или его потомка)
+        /// <summary> Найти в подчиненных объектах объект указанного типа (или его потомка)
         /// Возвращается первый найденный подходящий объект
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -67,8 +64,7 @@ namespace MiniUnity
             return result;
         }
 
-        /// <summary>
-        /// Найти в подчиненных объектах все объекты указанного типа (или его потомка)
+        /// <summary> Найти в подчиненных объектах все объекты указанного типа (или его потомка)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -83,8 +79,7 @@ namespace MiniUnity
             return result;
         }
 
-        /// <summary>
-        /// Найти в подчиненных объектах поведение указанного типа (или его потомка)
+        /// <summary> Найти в подчиненных объектах поведение указанного типа (или его потомка)
         /// Возвращается первый найденный подходящий объект
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -98,8 +93,7 @@ namespace MiniUnity
             return result as T;
         }
 
-        /// <summary>
-        /// Найти в подчиненных объектах все объекты-поведения указанного типа (или его потомка)
+        /// <summary> Найти в подчиненных объектах все объекты-поведения указанного типа (или его потомка)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -117,8 +111,7 @@ namespace MiniUnity
         #endregion
 
 
-        /// <summary>
-        /// Вызывается при старте программы или сцены, после того, как все элементы уже созданы
+        /// <summary> Вызывается при старте программы или сцены, после того, как все элементы уже созданы
         /// </summary>
         public virtual void Start()
         {
@@ -130,8 +123,7 @@ namespace MiniUnity
         }
 
 
-        /// <summary>
-        /// Обновить объект. 
+        /// <summary> Обновить объект. 
         /// Тут обновляюеся положение, или производится отрисовка, или т.п.
         /// </summary>
         public virtual void Update()
@@ -143,18 +135,92 @@ namespace MiniUnity
             }
         }
 
-        /// <summary>
-        /// Событие вызывается при инициализации объекта игры
+        /// <summary> Событие вызывается при инициализации объекта игры
         /// </summary>
         public event OnStartHandler  OnStart;
 
-        /// <summary>
-        /// Событие вызывается при обновлении состояния объекта игры
+        /// <summary> Событие вызывается при обновлении состояния объекта игры
         /// </summary>
         public event OnUpdateHandler  OnUpdate;
 
         public delegate void OnStartHandler(GameObject gameObject);
         public delegate void OnUpdateHandler(GameObject gameObject);
 
+
+        #region Обработка событий клавиатуры и отрисовка
+
+        #region Обработка событий клавиатуры
+
+        
+
+        #endregion
+
+
+        #region Отрисовка
+
+        /// <summary> Временное решение - тип приложения в виде перечисления
+        /// </summary>
+        public enum ApplicationType
+        {
+            ConsoleApp,
+            WinFormsApp,
+            WpfApp
+        }
+
+        /// <summary> Тип приложения (временное решение для указания, какие методы использовать при отрисовке и обработке клавиатуры)
+        /// </summary>
+        public static ApplicationType AppType { get; set; }
+
+        /// <summary> Объект отрисовывает себя и дочерние объекты
+        /// </summary>
+        public virtual void Draw()
+        {
+            // Отрисовка себя - пока пусто
+
+            // Отрисовка дочерних объектов
+            foreach (var child in Children)
+            {
+                child.Draw();
+            }
+        }
+
+
+
+        /// <summary> Обновить (перерисовать) картинку.
+        /// По факту, если один объект требует обновить картинку, перерисовывается вся сцена.
+        /// </summary>
+        public virtual void RefreshDraw()
+        {
+            if (Parent!=null) 
+                Parent.RefreshDraw();
+        }
+
+
+        #region WinForms
+
+        /// <summary> Отрисовка объектом себя в WinForms.
+        /// </summary>
+        /// <remarks>
+        /// Тут нельзя прямо взять и нарисовать что-то. 
+        /// Отрисовка делается при обработке окном события Paint,
+        /// и может вызывать обработчики для этого события.
+        /// Вот такой обработчик мы и должны определить.
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public virtual void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs e)
+        {
+            // Отрисовка себя - пока отрисовывать нечего
+
+            // Отрисовка дочерних объектов
+            foreach (var child in Children)
+            {
+                child.Draw_OnWinFormsPaintEvent(sender, e);
+            }
+        }
+        #endregion
+        #endregion
+
+        #endregion
     }
 }

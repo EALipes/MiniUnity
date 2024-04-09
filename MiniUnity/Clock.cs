@@ -2,15 +2,13 @@
 
 namespace MiniUnity
 {
-    /// <summary>
-    /// Часы, отслеживающие игровое время.
+    /// <summary> Часы, отслеживающие игровое время.
     /// Т.е. игра может быть остановлена, и за это время в ней ничего не произойдет.
     /// Кроме того, тут можно задать масштаб времени.
     /// </summary>
     public class Clock : IClock
     {
-        /// <summary>
-        /// Текущее игровое время в формате DateTime
+        /// <summary> Текущее игровое время в формате DateTime
         /// </summary>
         /// <returns></returns>
         public DateTime Now()
@@ -38,15 +36,13 @@ namespace MiniUnity
         }
 
         #region Масштаб времени
-        /// <summary>
-        /// Масштаб между игровым временем и реальным - сколько игровых секунд проходит за одну реальную секунду
+        /// <summary> Масштаб между игровым временем и реальным - сколько игровых секунд проходит за одну реальную секунду
         /// </summary>
         public float GameTimeScale { get; set; } = 1;
         #endregion
 
         #region Пуск/останов часов
-        /// <summary>
-        /// Остановить игровое время
+        /// <summary> Остановить игровое время
         /// </summary>
         public void Stop()
         {
@@ -56,8 +52,7 @@ namespace MiniUnity
             LastGameTime = Now();
         }
 
-        /// <summary>
-        /// Запустить отсчет времени дальше
+        /// <summary> Запустить отсчет времени дальше
         /// </summary>
         public void Resume()
         {
@@ -75,8 +70,7 @@ namespace MiniUnity
 
         private bool _stopped = false;
 
-        /// <summary>
-        /// Часы остановлены?
+        /// <summary> Часы остановлены?
         /// </summary>
         public bool Stopped
         {

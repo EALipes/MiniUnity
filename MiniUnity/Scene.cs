@@ -1,4 +1,6 @@
-﻿namespace MiniUnity
+﻿//using System.Windows.Forms;
+
+namespace MiniUnity
 {
     public class Scene: GameObject
     {
@@ -9,8 +11,7 @@
             base.Start();
         }
 
-        /// <summary>
-        /// Обновить объект. 
+        /// <summary> Обновить объект. 
         /// Тут обновлятеся положение, или производится отрисовка, или т.п.
         /// </summary>
         public override void Update()
@@ -24,5 +25,28 @@
         }
 
         public bool IsOver { get; set; }
+
+
+        #region Отрисовка
+
+        #region Winforms
+
+
+        #endregion
+
+
+        //public override void RefreshDraw()
+        //{
+        //    if (AppType == ApplicationType.ConsoleApp)
+        //    {
+        //    }
+        //    else if (AppType == ApplicationType.WinFormsApp)
+        //    {
+        //        if (GamePanel != null)
+        //            GamePanel.Refresh();
+        //    }
+        //}
+
+        #endregion
     }
 }

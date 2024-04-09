@@ -26,8 +26,7 @@
         public float Velocity { get; set; }
         public float Angle { get; set; }
 
-        /// <summary>
-        /// Масштаб изображения - метров в сантиметре экрана
+        /// <summary> Масштаб изображения - метров в сантиметре экрана
         /// </summary>
         public float ScreenScale { get; set; }
 

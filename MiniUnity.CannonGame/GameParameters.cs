@@ -5,8 +5,7 @@ using MiniUnity.CannonGame;
 
 namespace MiniUnity.CannonGame
 {
-    /// <summary>
-    /// Структура для передачи параметров игры
+    /// <summary> Структура для передачи параметров игры
     /// </summary>
     public class GameParameters : INotifyPropertyChanged
     {
@@ -56,8 +55,7 @@ namespace MiniUnity.CannonGame
         }
         private bool _playSound = true;
 
-        /// <summary>
-        /// Масштаб изображения - метров в сантиметре экрана
+        /// <summary> Масштаб изображения - метров в сантиметре экрана
         /// </summary>
         public float GameScreenScale
         {
@@ -114,8 +112,7 @@ namespace MiniUnity.CannonGame
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /// <summary>
-        /// Передача параметров в игру
+        /// <summary> Передача параметров в игру
         /// </summary>
         /// <param name="mainForm"></param>
         public void SetGameSettings(CannonGame game)
@@ -128,8 +125,7 @@ namespace MiniUnity.CannonGame
             game.ScreenScale = GameScreenScale;
         }
 
-        /// <summary>
-        /// Получение параметров из игры
+        /// <summary> Получение параметров из игры
         /// </summary>
         public void GetGameSettings(CannonGame game)
         {
