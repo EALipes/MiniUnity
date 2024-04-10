@@ -171,11 +171,23 @@ namespace MiniUnity
         /// </summary>
         public static ApplicationType AppType { get; set; }
 
-        /// <summary> Объект отрисовывает себя и дочерние объекты
+        /// <summary> Объект отрисовывает себя и пинает перерисоваться дочерние объекты
         /// </summary>
         public virtual void Draw()
         {
-            // Отрисовка себя - пока пусто
+            // Отрисовка себя 
+            // в зависимости от типа приложения может быть разной
+            // (пока тут пусто)
+            if (AppType == ApplicationType.ConsoleApp)
+            {
+            }
+            else if (AppType == ApplicationType.WinFormsApp)
+            {
+            }
+            else if (AppType == ApplicationType.WpfApp)
+            {
+            }
+
 
             // Отрисовка дочерних объектов
             foreach (var child in Children)
@@ -210,7 +222,8 @@ namespace MiniUnity
         /// <param name="e"></param>
         public virtual void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs e)
         {
-            // Отрисовка себя - пока отрисовывать нечего
+            // Отрисовка себя 
+            //(пока отрисовывать нечего)
 
             // Отрисовка дочерних объектов
             foreach (var child in Children)

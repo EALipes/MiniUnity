@@ -26,6 +26,7 @@ namespace MiniUnity_Cannon_DesktopApp
         private void InitializeComponent()
         {
             this.ControlPanel = new System.Windows.Forms.Panel();
+            this.VelocityTrackBar1 = new System.Windows.Forms.TrackBar();
             this.VelocityProgressBar1 = new System.Windows.Forms.ProgressBar();
             this.GameParamGroupBox = new System.Windows.Forms.GroupBox();
             this.PlaySoundCheckBox = new System.Windows.Forms.CheckBox();
@@ -42,15 +43,14 @@ namespace MiniUnity_Cannon_DesktopApp
             this.VelocityLabel = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.GameCanvasPanel = new System.Windows.Forms.Panel();
-            this.VelocityTrackBar1 = new System.Windows.Forms.TrackBar();
             this.ControlPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VelocityTrackBar1)).BeginInit();
             this.GameParamGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScaleEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeScaleEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FramePerSecEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AngleEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VelocityEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.VelocityTrackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // ControlPanel
@@ -68,6 +68,18 @@ namespace MiniUnity_Cannon_DesktopApp
             this.ControlPanel.Name = "ControlPanel";
             this.ControlPanel.Size = new System.Drawing.Size(164, 674);
             this.ControlPanel.TabIndex = 0;
+            // 
+            // VelocityTrackBar1
+            // 
+            this.VelocityTrackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.VelocityTrackBar1.LargeChange = 10;
+            this.VelocityTrackBar1.Location = new System.Drawing.Point(12, 231);
+            this.VelocityTrackBar1.Maximum = 500;
+            this.VelocityTrackBar1.Name = "VelocityTrackBar1";
+            this.VelocityTrackBar1.Size = new System.Drawing.Size(141, 42);
+            this.VelocityTrackBar1.TabIndex = 7;
+            this.VelocityTrackBar1.Value = 50;
             // 
             // VelocityProgressBar1
             // 
@@ -270,18 +282,7 @@ namespace MiniUnity_Cannon_DesktopApp
             this.GameCanvasPanel.Name = "GameCanvasPanel";
             this.GameCanvasPanel.Size = new System.Drawing.Size(937, 674);
             this.GameCanvasPanel.TabIndex = 2;
-            // 
-            // VelocityTrackBar1
-            // 
-            this.VelocityTrackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.VelocityTrackBar1.LargeChange = 10;
-            this.VelocityTrackBar1.Location = new System.Drawing.Point(12, 231);
-            this.VelocityTrackBar1.Maximum = 500;
-            this.VelocityTrackBar1.Name = "VelocityTrackBar1";
-            this.VelocityTrackBar1.Size = new System.Drawing.Size(141, 42);
-            this.VelocityTrackBar1.TabIndex = 7;
-            this.VelocityTrackBar1.Value = 50;
+            this.GameCanvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GameCanvasPanel_Paint);
             // 
             // MainForm
             // 
@@ -296,6 +297,7 @@ namespace MiniUnity_Cannon_DesktopApp
             this.Text = "Игра \"Пушка\"";
             this.ControlPanel.ResumeLayout(false);
             this.ControlPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VelocityTrackBar1)).EndInit();
             this.GameParamGroupBox.ResumeLayout(false);
             this.GameParamGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScaleEdit)).EndInit();
@@ -303,7 +305,6 @@ namespace MiniUnity_Cannon_DesktopApp
             ((System.ComponentModel.ISupportInitialize)(this.FramePerSecEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AngleEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VelocityEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.VelocityTrackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }

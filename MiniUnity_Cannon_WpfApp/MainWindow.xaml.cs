@@ -64,7 +64,7 @@ namespace MiniUnity_Cannon_WpfApp
             game = new CannonGame();
 
             // Отрисовка - отладочный говнокод
-            game.projectile.OnCallScreenRefresh = CallScreenRefresh;
+            //game.projectile.OnCallScreenRefresh = CallScreenRefresh;
             game.projectile.Start(); //DEBUG //только для инициализации, пока не налажен механизм вызова Paint через объект Game и Scene
 
         }

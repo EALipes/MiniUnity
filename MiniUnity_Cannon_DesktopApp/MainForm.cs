@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Media;
 using System.Threading;
 using System.Windows.Forms;
+using MiniUnity;
 
 // Используются для реализации INotifyPropertyChanged
 //using System.Runtime.CompilerServices;
@@ -85,9 +86,12 @@ namespace MiniUnity_Cannon_DesktopApp
             // Инициализация игры
             // (В консольном приложении это сделано в Main(), тут удобнее это  сделать при инициализации главной формы.
             game = new CannonGame();
-            game.projectile.OnCallScreenRefresh = CallScreenRefresh;
-            game.projectile.Start(); //DEBUG //только для инициализации, пока не налажен механизм вызова Paint через объект Game и Scene
-            GameCanvasPanel.Paint += game.projectile.Draw_OnPaintOnWinFormsEvent;
+            //game.projectile.OnCallScreenRefresh = CallScreenRefresh;
+            //game.projectile.Start(); //DEBUG //только для инициализации, пока не налажен механизм вызова Paint через объект Game и Scene
+            //GameCanvasPanel.Paint += game.projectile.Draw_OnPaintOnWinFormsEvent;
+            // настройка отображения игры в панели
+            game.GamePanel = GameCanvasPanel;
+            GameObject.AppType = GameObject.ApplicationType.WinFormsApp;
         }
 
         #region Параметры игры
@@ -148,13 +152,13 @@ namespace MiniUnity_Cannon_DesktopApp
 
         #region Отрисовка
         
-        /// <summary> При вызове обновления экрана из игры должно вызываться вот это.
-        /// </summary>
-        //TODO! По идее, это надо делать на уровне настроек игры на платформу.
-        private void CallScreenRefresh()
-        {
-            GameCanvasPanel.Refresh();
-        }
+        ///// <summary> При вызове обновления экрана из игры должно вызываться вот это.
+        ///// </summary>
+        ////TODO! По идее, это надо делать на уровне настроек игры на платформу.
+        //private void CallScreenRefresh()
+        //{
+        //    GameCanvasPanel.Refresh();
+        //}
 
 
 
@@ -266,6 +270,11 @@ namespace MiniUnity_Cannon_DesktopApp
 
 
         #endregion
+
+        private void GameCanvasPanel_Paint(object sender, PaintEventArgs e)
+        {
+            var paintcalled = true;
+        }
     }
 
 

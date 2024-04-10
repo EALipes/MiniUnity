@@ -37,12 +37,14 @@ namespace MiniUnity
                 {
                     scene = value;
                     // При вставке сцены в игру будем указывать саму игру как родителя.
-                    scene.Parent = this;
+                    //scene.Parent = this;
+                    AddComponent(scene);
                 }
                 else // value=null
                 {
                     // При удалении сцены очистим родителя
-                    if (scene != null) scene.Parent = null;
+                    //if (scene != null) scene.Parent = null;
+                    RemoveComponent(scene);
                 }
             }
         }
@@ -99,6 +101,7 @@ namespace MiniUnity
 
             Orchestrator.Start();
             Scene.Start();
+            RefreshDraw();
             
             // Вызываем цикл обновлений под управлением Orchestrator;
             // В цикле вызываем scene.Update()
@@ -129,7 +132,7 @@ namespace MiniUnity
 
         /// <summary> Панель или др. видимый элемент, на котором будет отображаться графика игры
         /// </summary>
-        protected System.Windows.Forms.Control GamePanel 
+        public System.Windows.Forms.Control GamePanel 
         {
             get
             {
@@ -139,13 +142,17 @@ namespace MiniUnity
             set
             {
                 if (_gamePanel != null)
+                    //_gamePanel.Paint -= Scene.Draw_OnWinFormsPaintEvent;
                     _gamePanel.Paint -= Draw_OnWinFormsPaintEvent;
                 _gamePanel = value;
                 if (_gamePanel != null)
+                    //_gamePanel.Paint += Scene.Draw_OnWinFormsPaintEvent;
                     _gamePanel.Paint += Draw_OnWinFormsPaintEvent;
             }
         }
         private System.Windows.Forms.Control _gamePanel;
+
+
         #endregion
 
         #region WPF
@@ -182,6 +189,11 @@ namespace MiniUnity
                 // Даем команду перерисовать панель игры
                 if (GamePanel != null)
                     GamePanel.Refresh();
+                // Даем приложению обработать это и другие события Windows
+                if (Application.MessageLoop)
+                {
+                    Application.DoEvents();
+                }
             }
             else if (AppType == ApplicationType.WpfApp)
             {

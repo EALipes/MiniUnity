@@ -1,5 +1,7 @@
 ﻿//using System.Windows.Forms;
 
+using System.Windows.Forms;
+
 namespace MiniUnity
 {
     public class Scene: GameObject
@@ -31,22 +33,7 @@ namespace MiniUnity
 
         #region Winforms
 
-
         #endregion
-
-
-        //public override void RefreshDraw()
-        //{
-        //    if (AppType == ApplicationType.ConsoleApp)
-        //    {
-        //    }
-        //    else if (AppType == ApplicationType.WinFormsApp)
-        //    {
-        //        if (GamePanel != null)
-        //            GamePanel.Refresh();
-        //    }
-        //}
-
         #endregion
     }
 }

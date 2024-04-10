@@ -72,10 +72,10 @@ namespace MiniUnity.CannonGame
             velocity.Y = Velocity.Y + dVY;
             Velocity = velocity;
 
-            // Выводим данные о положении снаряда
-            //Console.WriteLine(DateTime.Now.Minute+":"+DateTime.Now.Second+"."+DateTime.Now.Millisecond);
-            Console.WriteLine("t="+time + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
-            //TODO! Убрать использование Console и сделать обобщенно
+            //// Выводим данные о положении снаряда
+            ////Console.WriteLine(DateTime.Now.Minute+":"+DateTime.Now.Second+"."+DateTime.Now.Millisecond);
+            //Console.WriteLine("t="+time + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
+            ////TODO! Убрать использование Console и сделать обобщенно
 
             // Если снаряд упал на землю - он останавливается, дальше не летит.
             if ((Position.Y < 0) & (Velocity.Y<=0))
@@ -86,7 +86,7 @@ namespace MiniUnity.CannonGame
 
             base.Update();
             // Это надо будет перенести в Scene.Update, чтоб вызывалось один раз
-            RefreshScreen();
+            RefreshDraw();
         }
 
 
@@ -132,63 +132,40 @@ namespace MiniUnity.CannonGame
 
         #region Отрисовка
 
-        // * 1. Вызов из игры обновления экрана
-        
-        // Вероятно, это надо будет просто поставить в конце Scene.Update
-        //public void RefreshScreen()
-        ////TODO! Заменено на GameObject.RefreshDraw()
-        //{
-        //    if (OnCallScreenRefresh != null) OnCallScreenRefresh();
-        //}
-
-        // Вызовы обновления на разных платформах
-
-        public Action OnCallScreenRefresh { get; set; }
-
-        // Вызов обновления в консольном приложении
-        public void CallConsoleRedraw()
-        {
-            // Никаких специальных действий не требуется.
-            // Просто вызываем консольный Redraw
-            // Тут надо будет вызывать метод Сцены, а он уже должен вызывать методы вложенных в Сцену объектов
-            Draw_WriteToConsole();
-        }
-
-        // Вызов обновления в приложении WinForms
-        public void CallWinformsRedraw()
-        {
-            // Похоже, вообще не требуется.
-            // Вместо этого форма установит в OnCallScreenRefresh свой this.Refresh()
-        }
-
-
-        // * 2. Отрисовка - вызывается из приложения, в котором работает игра
-
+        // Console
 
         /// <summary> Отрисовка ядра средствами консоли
         /// </summary>
-        public void Draw_WriteToConsole()
+        public override void Draw()
         {
-            Console.WriteLine(Position + ";  V = (" + Velocity +")");
-            //Console.WriteLine("t="+time + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
+            if (AppType == ApplicationType.ConsoleApp)
+            {
+                Console.WriteLine(Position + ";  V = (" + Velocity + ")");
+                //Console.WriteLine("t="+time + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
+            }
+
+            base.Draw();
         }
+
+        // WinForms
 
         /// <summary> Функция отрисовки ядра средствами WinForms - в формате события, вызываемого компонентом формы
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void Draw_OnPaintOnWinFormsEvent(object sender, PaintEventArgs e)
+        public override  void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs args)
         {
-            Draw_PaintOnWinForms(e.Graphics);
-        }
+            if (Game == null)
+            {
+                Debug.Write("Game==null при отрисовке Projectile.Draw_OnWinFormsPaintEvent");
+                return;
+            }
 
-        /// <summary> Функция отрисовки ядра средствами WinForms
-        /// </summary>
-        /// <param name="graphics"></param>
-        public void Draw_PaintOnWinForms(Graphics graphics)
-        {
+            var graphics = args.Graphics;
             try
             {
+                graphics.ResetTransform();
+
                 Pen bluePen = new Pen(Color.Blue, 3);
                 Brush blueBrush = new SolidBrush(Color.Blue);
                 Pen redPen = new Pen(Color.Red, 2);
