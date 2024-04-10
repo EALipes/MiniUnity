@@ -105,7 +105,7 @@ namespace MiniUnity.CannonGame
         /// <summary> Отрисовка пушки в консольном приложении
         /// 
         /// </summary>
-        public override void Draw()
+        protected override void Draw()
         {
             if (AppType == ApplicationType.ConsoleApp)
             {
@@ -120,7 +120,7 @@ namespace MiniUnity.CannonGame
         /// <summary> Функция отрисовки пушки средствами WinForms
         /// </summary>
         /// <param name="graphics"></param>
-        public override void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs args)
+        protected override void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs args)
         {
             if (Game == null)
             {

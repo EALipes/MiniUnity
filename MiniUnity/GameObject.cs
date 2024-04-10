@@ -172,8 +172,9 @@ namespace MiniUnity
         public static ApplicationType AppType { get; set; }
 
         /// <summary> Объект отрисовывает себя и пинает перерисоваться дочерние объекты
+        /// Не рекомендуется вызывать  этот метод напрямую. Используйте RefreshDraw()
         /// </summary>
-        public virtual void Draw()
+        protected virtual void Draw()
         {
             // Отрисовка себя 
             // в зависимости от типа приложения может быть разной
@@ -199,8 +200,15 @@ namespace MiniUnity
 
 
         /// <summary> Обновить (перерисовать) картинку.
-        /// По факту, если один объект требует обновить картинку, перерисовывается вся сцена.
+        /// Именно этот метод должен вызываться, когда необходимо перерисовать объект.
         /// </summary>
+        /// <remarks>
+        /// Именно этот метод должен вызываться, когда необходимо перерисовать объект.
+        /// Он может вызывать либо Draw, либо другой метод - 
+        /// например, опосредованно вызывать Draw_OnWinFormsPaintEvent.
+        /// Это уже сам объект лучше знает, как правильно сделать перерисовку. 
+        /// По факту, если один объект требует обновить картинку, перерисовывается вся сцена.
+        /// </remarks>
         public virtual void RefreshDraw()
         {
             if (Parent!=null) 
@@ -211,6 +219,7 @@ namespace MiniUnity
         #region WinForms
 
         /// <summary> Отрисовка объектом себя в WinForms.
+        /// Не рекомендуется вызывать  этот метод напрямую. Используйте RefreshDraw()
         /// </summary>
         /// <remarks>
         /// Тут нельзя прямо взять и нарисовать что-то. 
@@ -220,7 +229,7 @@ namespace MiniUnity
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public virtual void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs e)
+        protected virtual void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs e)
         {
             // Отрисовка себя 
             //(пока отрисовывать нечего)

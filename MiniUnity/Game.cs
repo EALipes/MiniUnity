@@ -177,7 +177,7 @@ namespace MiniUnity
 
         #endregion
 
-        public override void RefreshDraw()
+        protected override void RefreshDraw()
         {
             if (AppType == ApplicationType.ConsoleApp)
             {

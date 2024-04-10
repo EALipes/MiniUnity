@@ -136,7 +136,7 @@ namespace MiniUnity.CannonGame
 
         /// <summary> Отрисовка ядра средствами консоли
         /// </summary>
-        public override void Draw()
+        protected override void Draw()
         {
             if (AppType == ApplicationType.ConsoleApp)
             {
@@ -153,7 +153,7 @@ namespace MiniUnity.CannonGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public override  void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs args)
+        protected override  void Draw_OnWinFormsPaintEvent(object sender, PaintEventArgs args)
         {
             if (Game == null)
             {
