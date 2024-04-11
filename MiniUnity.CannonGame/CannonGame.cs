@@ -20,8 +20,8 @@
         //    base.Play();
         //}
 
-        public Cannon cannon;
-        public Projectile projectile;
+        protected Cannon cannon { get; set; }
+        protected Projectile projectile { get; set; } //TODO: Может, убрать это? Пусть при каждом выстреле создается новое ядро?
 
         public float Velocity { get; set; }
         public float Angle { get; set; }

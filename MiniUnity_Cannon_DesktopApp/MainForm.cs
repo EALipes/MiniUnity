@@ -55,30 +55,30 @@ namespace MiniUnity_Cannon_DesktopApp
 
 
             // Подключение к событиям через привязку
-            Binding b = new Binding("Value", gameParams, "Speed", 
+            Binding b = new Binding(nameof(VelocityEdit.Value), gameParams, nameof(GameParams.Speed), 
                 formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             VelocityEdit.DataBindings.Add(b);
 
-            Binding b2 = new Binding("Value", gameParams, "Speed");
+            Binding b2 = new Binding("Value", gameParams, nameof(GameParams.Speed));
             VelocityProgressBar1.DataBindings.Add(b2);
 
-            Binding b3 = new Binding("Value", gameParams, "Speed",
+            Binding b3 = new Binding("Value", gameParams, nameof(GameParams.Speed),
             formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             VelocityTrackBar1.DataBindings.Add(b3);
 
-            Binding bA = new Binding("Value", gameParams, "Angle",
+            Binding bA = new Binding("Value", gameParams, nameof(GameParams.Angle),
             formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             AngleEdit.DataBindings.Add(bA);
 
-            Binding bTS = new Binding("Value", gameParams, "TimeScale",
+            Binding bTS = new Binding("Value", gameParams, nameof(GameParams.TimeScale),
                 formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             this.TimeScaleEdit.DataBindings.Add(bTS); //ValueChanged += new System.EventHandler(this.TimeScaleEdit_ValueChanged);
 
-            Binding bS = new Binding("Value", gameParams, "GameScreenScale",
+            Binding bS = new Binding("Value", gameParams, nameof(GameParams.GameScreenScale),
                 formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             this.ScaleEdit.DataBindings.Add(bS); //ValueChanged += new System.EventHandler(this.ScaleEdit_ValueChanged);
             
-            Binding bFPS = new Binding("Value", gameParams, "FramesPerSec",
+            Binding bFPS = new Binding("Value", gameParams, nameof(GameParams.FramesPerSec),
                 formattingEnabled: true, dataSourceUpdateMode: DataSourceUpdateMode.OnPropertyChanged);
             this.FramePerSecEdit.DataBindings.Add(bFPS); //ValueChanged += new System.EventHandler(this.FramePerSecEdit_ValueChanged);
 
@@ -258,13 +258,15 @@ namespace MiniUnity_Cannon_DesktopApp
 
         private void VelocityChanged_to_VelocityEdit(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Velocity")
+            if (e.PropertyName == nameof(GameParams.Speed) )
+            //if (e.PropertyName == "Velocity")
                 VelocityEdit.Value = (decimal)(sender as GameParameters)?.Speed;
         }
 
         private void AngleChanged_to_AngleEdit(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Angle")
+            if (e.PropertyName == nameof(GameParams.Angle))
+            //if (e.PropertyName == "Angle")
                 AngleEdit.Value = (decimal)(sender as GameParameters)?.Angle;
         }
 

@@ -41,13 +41,19 @@ namespace MiniUnity
         // При добавлении компонента у него устанавливается свойство Parent = this
         public void AddComponent(GameObject gameObject)
         {
+            if (gameObject.Parent!=null)
+                throw new InvalidOperationException("Нельзя вставить объект, уже принадлежащий другому родителю");
+
             Children.Add(gameObject);
             gameObject.Parent = this;
         }
         public void RemoveComponent(GameObject gameObject)
         {
-            Children.Remove(gameObject);
-            gameObject.Parent = null;
+            if (Children.Remove(gameObject))
+            {
+                // будет установлено только если этот объект действительно был в списке
+                gameObject.Parent = null;
+            }
         }
 
         /// <summary> Найти в подчиненных объектах объект указанного типа (или его потомка)
@@ -60,7 +66,8 @@ namespace MiniUnity
         {
             // Мне лень честно писать поиск первого подходящего элемента такого типа в списке,
             // поэтому я использовал LINQ, хотя это заклинание проходят только на старших курсах Хогвартса )))
-            var result = Children?.FirstOrDefault(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))) ) as T;
+            var result = Children?.FirstOrDefault(b => (b is T )) as T;
+            //var result = Children?.FirstOrDefault(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))) ) as T;
             return result;
         }
 
@@ -73,7 +80,8 @@ namespace MiniUnity
         {
             // Тоже LINQ
             var result = Children?
-                .Where(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))))
+                .Where(b => b is T)
+                //.Where(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))))
                 .Select(b=> b as T)
                 .ToList();
             return result;
@@ -89,7 +97,8 @@ namespace MiniUnity
         {
             // Мне лень честно писать поиск первого подходящего элемента такого типа в списке,
             // поэтому я использовал LINQ, хотя это заклинание проходят только на старших курсах Хогвартса )))
-            var result = Children?.FirstOrDefault(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))) );
+            var result = Children?.FirstOrDefault(b => b is T );
+            //var result = Children?.FirstOrDefault(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))) );
             return result as T;
         }
 
@@ -102,7 +111,8 @@ namespace MiniUnity
         {
             // Тоже LINQ
             var result = Children?
-                .Where(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))))
+                .Where(b => b is T)
+                //.Where(b => (b.GetType() == typeof(T)) || (b.GetType().IsSubclassOf(typeof(T))))
                 .Select(b => b as T)
                 .ToList();
             return result;

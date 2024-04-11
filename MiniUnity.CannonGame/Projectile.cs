@@ -21,7 +21,7 @@ namespace MiniUnity.CannonGame
         public Vector3 Velocity { get; set; } = new Vector3();
 
         // Отметим момент падения и перестанем сообщать о ранее упавшем снаряде
-        public bool Fallen { get; set; } = false;
+        private bool Fallen { get; set; } = false;
 
         private float time = 0;
 
@@ -126,6 +126,8 @@ namespace MiniUnity.CannonGame
             //TODO! Убрать использование Console и сделать обобщенно
             Console.WriteLine("Шлёп!");
             Fallen = true;
+            
+            // Если ядро упало - игра окончена.
             Scene.IsOver = true;
         }
 

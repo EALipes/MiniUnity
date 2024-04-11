@@ -20,7 +20,7 @@ namespace MiniUnity.CannonGame
             set
             {
                 _framesPerSec = value;
-                OnPropertyChanged("FramesPerSec");
+                OnPropertyChanged(nameof(FramesPerSec));
             }
         }
         private int _framesPerSec = 25;
@@ -35,7 +35,7 @@ namespace MiniUnity.CannonGame
             set
             {
                 _timeScale = value;
-                OnPropertyChanged("TimeScale");
+                OnPropertyChanged(nameof(TimeScale));
             }
         }
         private float _timeScale = 1;
@@ -50,7 +50,7 @@ namespace MiniUnity.CannonGame
             set
             {
                 _playSound = value;
-                OnPropertyChanged("PlaySound");
+                OnPropertyChanged(nameof(PlaySound));
             }
         }
         private bool _playSound = true;
@@ -67,7 +67,7 @@ namespace MiniUnity.CannonGame
             set
             {
                 _gameScreenScale = value;
-                OnPropertyChanged("GameScreenScale");
+                OnPropertyChanged(nameof(GameScreenScale));
             }
         }
         private float _gameScreenScale = 100.0f;
@@ -82,7 +82,7 @@ namespace MiniUnity.CannonGame
             set
             {
                 _speed = value;
-                OnPropertyChanged("Speed");
+                OnPropertyChanged(nameof(Speed));
             }
         }
         private float _speed = 100;
@@ -97,7 +97,7 @@ namespace MiniUnity.CannonGame
             set
             {
                 _angle = value;
-                OnPropertyChanged("Angle");
+                OnPropertyChanged(nameof(Angle));
             }
         }
         private float _angle = 45;

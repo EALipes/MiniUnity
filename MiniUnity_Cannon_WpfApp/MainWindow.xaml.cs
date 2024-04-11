@@ -65,7 +65,7 @@ namespace MiniUnity_Cannon_WpfApp
 
             // Отрисовка - отладочный говнокод
             //game.projectile.OnCallScreenRefresh = CallScreenRefresh;
-            game.projectile.Start(); //DEBUG //только для инициализации, пока не налажен механизм вызова Paint через объект Game и Scene
+            //game.projectile.Start(); //DEBUG //только для инициализации, пока не налажен механизм вызова Paint через объект Game и Scene
 
         }
 
@@ -78,84 +78,84 @@ namespace MiniUnity_Cannon_WpfApp
             }
         }
 
-        /// <summary> Отрисовка пушки и ядра
-        /// </summary>
-        private void CallScreenRefresh()
-        {
-            Vector3 Position = game.projectile.Position;
+        ///// <summary> Отрисовка пушки и ядра
+        ///// </summary>
+        //private void CallScreenRefresh()
+        //{
+        //    Vector3 Position = game.projectile.Position;
 
-            var prX = (double) Position.X;
-            var prY = (double) Position.Y;
-            //var prX = (float) Position.X;
-            //var prY = (float) Position.Y;
-            // отмасштабируем эти координаты, чтоб все вместилось в экран
-            // на экране в WPF используются независимые от устройства единицы, равные 1/96 дюйма
-            // т.е. 1 ед = 1/96 * 2.54 см
-            // в 1 см - 96/2.54 единиц
-            // 1 см =  37.79 единиц
-            var ScaleCoeff = 37.79;
-            //var ScaleCoeff = 37.79f;
-            prX = prX * ScaleCoeff / game.ScreenScale;
-            prY = prY * ScaleCoeff / game.ScreenScale;
-            // учтем размер рисуемого прямоугольника, и соответственно сместим его начало
-            // учтем, что началом координаты Y у нас должен быть конец (нижний) экрана
-            // и что координата Y в игре направлена вверх, а у нас на экране - вниз
-            var projectileRectSize = 10;
-            var screenHeight = GameCanvasGrid.ActualHeight;
-            var screenX = prX;
-            var screenY = screenHeight - projectileRectSize - prY;
-
-
-            ////var left = ProjectileEllipse.GetValue(Canvas.LeftProperty);
-            ////var top = ProjectileEllipse.GetValue(Canvas.TopProperty);
-            ////var left2 = Canvas.GetLeft(ProjectileEllipse);
-            ////var top2 = Canvas.GetTop(ProjectileEllipse);
-
-            ////Canvas.SetLeft(ProjectileEllipse, screenX);
-            ////Canvas.SetTop(ProjectileEllipse, screenY);
-
-            //ProjectileEllipse.SetValue(Canvas.LeftProperty, screenX);
-            //ProjectileEllipse.SetValue(Canvas.TopProperty, screenY);
-
-            Debug.WriteLine("screenX="+screenX.ToString("F1")+" screenY="+screenY.ToString("F1"));
+        //    var prX = (double) Position.X;
+        //    var prY = (double) Position.Y;
+        //    //var prX = (float) Position.X;
+        //    //var prY = (float) Position.Y;
+        //    // отмасштабируем эти координаты, чтоб все вместилось в экран
+        //    // на экране в WPF используются независимые от устройства единицы, равные 1/96 дюйма
+        //    // т.е. 1 ед = 1/96 * 2.54 см
+        //    // в 1 см - 96/2.54 единиц
+        //    // 1 см =  37.79 единиц
+        //    var ScaleCoeff = 37.79;
+        //    //var ScaleCoeff = 37.79f;
+        //    prX = prX * ScaleCoeff / game.ScreenScale;
+        //    prY = prY * ScaleCoeff / game.ScreenScale;
+        //    // учтем размер рисуемого прямоугольника, и соответственно сместим его начало
+        //    // учтем, что началом координаты Y у нас должен быть конец (нижний) экрана
+        //    // и что координата Y в игре направлена вверх, а у нас на экране - вниз
+        //    var projectileRectSize = 10;
+        //    var screenHeight = GameCanvasGrid.ActualHeight;
+        //    var screenX = prX;
+        //    var screenY = screenHeight - projectileRectSize - prY;
 
 
+        //    ////var left = ProjectileEllipse.GetValue(Canvas.LeftProperty);
+        //    ////var top = ProjectileEllipse.GetValue(Canvas.TopProperty);
+        //    ////var left2 = Canvas.GetLeft(ProjectileEllipse);
+        //    ////var top2 = Canvas.GetTop(ProjectileEllipse);
 
-            // *** Говнокод --------------------------------
+        //    ////Canvas.SetLeft(ProjectileEllipse, screenX);
+        //    ////Canvas.SetTop(ProjectileEllipse, screenY);
+
+        //    //ProjectileEllipse.SetValue(Canvas.LeftProperty, screenX);
+        //    //ProjectileEllipse.SetValue(Canvas.TopProperty, screenY);
+
+        //    Debug.WriteLine("screenX="+screenX.ToString("F1")+" screenY="+screenY.ToString("F1"));
+
+
+
+        //    // *** Говнокод --------------------------------
             
-            // Пытаемся что-то нарисовать на форме
+        //    // Пытаемся что-то нарисовать на форме
 
-            GameCanvasGrid.InvalidateVisual();
+        //    GameCanvasGrid.InvalidateVisual();
 
-            var drawingGroup = new DrawingGroup();
+        //    var drawingGroup = new DrawingGroup();
             
-            //var projectileEllipse = new Ellipse();
-            //projectileEllipse.Width = projectileRectSize;
-            //projectileEllipse.Height = projectileRectSize;
-            //Canvas.SetLeft(projectileEllipse, screenX);
-            //Canvas.SetTop(projectileEllipse, screenY);
+        //    //var projectileEllipse = new Ellipse();
+        //    //projectileEllipse.Width = projectileRectSize;
+        //    //projectileEllipse.Height = projectileRectSize;
+        //    //Canvas.SetLeft(projectileEllipse, screenX);
+        //    //Canvas.SetTop(projectileEllipse, screenY);
 
-            // строим кружок в рассчитанных координатах
-            var projectileEllipse = new EllipseGeometry(new Point(screenX, screenY), 5, 5);
+        //    // строим кружок в рассчитанных координатах
+        //    var projectileEllipse = new EllipseGeometry(new Point(screenX, screenY), 5, 5);
             
-            GeometryGroup geometryGroup = new GeometryGroup();
-            geometryGroup.Children.Add(projectileEllipse);
+        //    GeometryGroup geometryGroup = new GeometryGroup();
+        //    geometryGroup.Children.Add(projectileEllipse);
 
-            // Сохраняем описание геометрии
-            GeometryDrawing geometryDrawing = new GeometryDrawing();
-            //geometryDrawing.Geometry = geometryGroup;
-            geometryDrawing.Geometry = projectileEllipse;
+        //    // Сохраняем описание геометрии
+        //    GeometryDrawing geometryDrawing = new GeometryDrawing();
+        //    //geometryDrawing.Geometry = geometryGroup;
+        //    geometryDrawing.Geometry = projectileEllipse;
     
-            // Настраиваем перо
-            geometryDrawing.Pen = new Pen(Brushes.Blue, 0.005);
+        //    // Настраиваем перо
+        //    geometryDrawing.Pen = new Pen(Brushes.Blue, 0.005);
     
-            // Добавляем готовый слой в контейнер отображения
-            drawingGroup.Children.Add(geometryDrawing);
+        //    // Добавляем готовый слой в контейнер отображения
+        //    drawingGroup.Children.Add(geometryDrawing);
 
-            Image1.Source = new DrawingImage(drawingGroup);
-            //Image1.Source = new DrawingImage(projectileEllipse);
+        //    Image1.Source = new DrawingImage(drawingGroup);
+        //    //Image1.Source = new DrawingImage(projectileEllipse);
 
-        }
+        //}
 
         #region Параметры игры
         private readonly GameParameters gameParams;

@@ -82,6 +82,8 @@ namespace MiniUnity
 
         public override void Start()
         {
+            IsOver = false;
+            Orchestrator.Start();
             base.Start();
         }
 
@@ -96,11 +98,14 @@ namespace MiniUnity
             // По идее, это не обязательно даже тут проверять, коли сцена задана явно в параметре. Убрать???
             if (Scene == null) throw new NullReferenceException("Не определено отыгрываемых сцен");
 
-            game.IsOver = false;
-            scene.IsOver = false;
+            Start();
+            //// Вместо всего этого:
+            //game.IsOver = false;
+            //scene.IsOver = false;
 
-            Orchestrator.Start();
-            Scene.Start();
+            //Orchestrator.Start();
+            //Scene.Start();
+
             RefreshDraw();
             
             // Вызываем цикл обновлений под управлением Orchestrator;
@@ -177,7 +182,7 @@ namespace MiniUnity
 
         #endregion
 
-        protected override void RefreshDraw()
+        public override void RefreshDraw()
         {
             if (AppType == ApplicationType.ConsoleApp)
             {
