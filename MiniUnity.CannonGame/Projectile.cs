@@ -20,10 +20,16 @@ namespace MiniUnity.CannonGame
         // Скорость снаряда
         public Vector3 Velocity { get; set; } = new Vector3();
 
-        // Отметим момент падения и перестанем сообщать о ранее упавшем снаряде
-        private bool Fallen { get; set; } = false;
+        /// <summary> Снаряд летит - => меняет положение и скорость 
+        /// </summary>
+        private bool Flying { get; set; } = false;
+       
+        /// <summary> Только что упал, нужно издать Плюх, м/б отрисовать брызги, после чего этот флаг очистить 
+        /// </summary>
+        private bool JustFallen { get; set; } = false;
 
-        private float time = 0;
+        // отслеживаем время полета
+        private float flightTime = 0;
 
         protected SoundPlayer projectileFliesSoundPlayer;
         protected SoundPlayer projectileFallSoundPlayer;
@@ -51,36 +57,44 @@ namespace MiniUnity.CannonGame
 
         public override void Update()
         {
-            if (Fallen) return;
+            // этот флаг очищается сразу при ближайшем Update
+            if (JustFallen)
+                JustFallen = false;
+
+            // Если снаряд не летит - он лежит где был, нечего обновлять.
+            if (!Flying) return;
+            //if (Fallen) return;
 
             // Прошло времени с прошлого обновления
             float dT = Game.Orchestrator.TimeDeltaFromLastUpdateInSeconds;
-            time = time + dT;
+            // время полета
+            flightTime = flightTime + dT;
 
             // Ускорение свободного падения - 9.81 м/с^2
-            float G = -9.81f; //Направлено вниз, поэтому с минусом
-            float dVY = G * dT;
-            //float dVY2 = G * 1 / CannonGame.CannonGameFramesPerSecond;
+            // Учтем падение вертикальной скорости
+            float dVY = Physics.G * dT;
+            Vector3 acceleration = new Vector3(0, Physics.G, 0);
 
             // Отрабатываем изменение положения; положение по Y меняется ускоренно.
-            var X = Position.X + Velocity.X * dT;
-            var Y = Position.Y + (Velocity.Y + dVY/2) * dT ;
-            Position = new Vector3(X, Y, 0);
+            //var X = Position.X + Velocity.X * dT;
+            //var Y = Position.Y + (Velocity.Y + dVY/2) * dT ;
+            //Position = new Vector3(X, Y, 0);
+            // наверное, можно и так:
+            Position = Position + (Velocity * dT) + (acceleration * dT / 2);
+
 
             // Отрабатываем изменение скорости
-            var velocity = Velocity;
-            velocity.Y = Velocity.Y + dVY;
-            Velocity = velocity;
+            //var velocity = Velocity;
+            //velocity.Y = Velocity.Y + dVY;
+            //Velocity = velocity;
+            // попробуем так:
+            Velocity = Velocity + acceleration * dT;
 
-            //// Выводим данные о положении снаряда
-            ////Console.WriteLine(DateTime.Now.Minute+":"+DateTime.Now.Second+"."+DateTime.Now.Millisecond);
-            //Console.WriteLine("t="+time + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
-            ////TODO! Убрать использование Console и сделать обобщенно
 
             // Если снаряд упал на землю - он останавливается, дальше не летит.
-            if ((Position.Y < 0) & (Velocity.Y<=0))
+            if ((Position.Y <= 0) & (Velocity.Y<=0))
             {
-                if (!Fallen)
+                if (Flying)
                     Fall();
             }
 
@@ -97,15 +111,16 @@ namespace MiniUnity.CannonGame
                 projectileFliesSoundPlayer.PlayLooping();
             //projectileFliesSoundPlayer.Play();
 
-            time = 0;
-
             // Отрисовываем снаряд на месте пуска
-            Update();
+            //Update();
+            RefreshDraw();
 
-            Fallen = false;
+            // Начинаем отсчет времени полета
+            Flying = true;
+            flightTime = 0;
 
+            // Придаем снаряду начальную скорость
             var elevationAngleInRadians = elevationAngle * Math.PI / 180;
-
             var velocity = Velocity;
             velocity.X = (float) (velocityScalar * Math.Cos(elevationAngleInRadians));
             velocity.Y = (float) (velocityScalar * Math.Sin(elevationAngleInRadians));
@@ -114,19 +129,21 @@ namespace MiniUnity.CannonGame
 
         private void Fall()
         {
-            if (Game.PlaySound)
-                projectileFallSoundPlayer.Play();
-
-
+            // При столкновении с землёй скорость обнуляется, высота тоже.
             var position = Position;
             position.Y = 0;
             Position = position;
             Velocity=Vector3.Zero;
 
-            //TODO! Убрать использование Console и сделать обобщенно
-            Console.WriteLine("Шлёп!");
-            Fallen = true;
             
+            //Console.WriteLine("Шлёп!"); // Перенесено в Draw()
+            //Fallen = true;
+            JustFallen = true; // Надо один раз отрисовать Шлеп! и брызги.
+            // И издать звук - это мы можем пока сделать здесь.
+            if (Game.PlaySound)
+                projectileFallSoundPlayer.Play();
+
+
             // Если ядро упало - игра окончена.
             Scene.IsOver = true;
         }
@@ -142,8 +159,11 @@ namespace MiniUnity.CannonGame
         {
             if (AppType == ApplicationType.ConsoleApp)
             {
+                if (JustFallen)
+                    Console.WriteLine("Шлёп!");
+
                 Console.WriteLine(Position + ";  V = (" + Velocity + ")");
-                //Console.WriteLine("t="+time + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
+                //Console.WriteLine("t="+FlightTime + "   X="+Position.X.ToString("F2") + "; Y="+Position.Y.ToString("F2") + "  V.Y = "+ Velocity.Y.ToString("F2"));
             }
 
             base.Draw();
