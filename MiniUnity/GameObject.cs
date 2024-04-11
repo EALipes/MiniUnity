@@ -128,8 +128,8 @@ namespace MiniUnity
             foreach (GameObject c in Children)
             {
                 c.Start();
-                if (OnStart != null) OnStart(this);
             }
+            if (OnStart != null) OnStart(this);
         }
 
 
@@ -141,8 +141,8 @@ namespace MiniUnity
             foreach (GameObject c in Children)
             {
                 c.Update();
-                if (OnUpdate != null) OnUpdate(this);
             }
+            if (OnUpdate != null) OnUpdate(this);
         }
 
         /// <summary> Событие вызывается при инициализации объекта игры

@@ -17,6 +17,8 @@ namespace MiniUnity.CannonGame
 
         protected SoundPlayer cannonFiresSoundPlayer;
 
+        protected bool JustFired = false;
+
         public Cannon()
         {
             cannonFiresSoundPlayer = new SoundPlayer();
@@ -43,6 +45,7 @@ namespace MiniUnity.CannonGame
         /// <param name="velocityScalar">Скорость снаряда</param>
         public void Fire(Projectile projectile, float elevationAngle, float velocityScalar)
         {
+            JustFired = true;
             RefreshDraw();
             if (Game.PlaySound)
                 //SoundPlayerGunFired.Play();
@@ -54,10 +57,10 @@ namespace MiniUnity.CannonGame
             //// Отрисовываем снаряд на месте пуска
             //projectile.Update();
 
-            //projectile.Fallen = false;
-            ////projectile
-            //// TODO! Вывод поправить, сделать в зависимости от типа приложения.
-            Console.WriteLine("Бабах!");
+            ////projectile.Fallen = false;
+            //////projectile
+            //Console.WriteLine("Бабах!");
+
 
             projectile.Position = Position;
 
@@ -68,6 +71,8 @@ namespace MiniUnity.CannonGame
             //velocity.Y = (float) (velocityScalar * Math.Sin(elevationAngleInRadians));
             //projectile.Velocity = velocity;
         }
+
+
 
         public void Fire()
         {
@@ -97,6 +102,14 @@ namespace MiniUnity.CannonGame
 
         public Projectile Projectile { get; set; }
 
+        public override void Update()
+        {
+            // Этот флаг работает только для одной отрисовки, и очищается на ближайшем Update()
+            if (JustFired)
+                JustFired = false;
+
+            base.Update();
+        }
 
         #region Отрисовка 
 
@@ -110,6 +123,8 @@ namespace MiniUnity.CannonGame
             if (AppType == ApplicationType.ConsoleApp)
             {
                 var s = this.GetType().Name + ":  X=" + Position.X.ToString("F1") + " Y=" + Position.Y.ToString("F1");
+                if (JustFired)
+                    Console.WriteLine("Бабах!");
             }
 
             base.Draw();
@@ -236,6 +251,12 @@ namespace MiniUnity.CannonGame
 
                     graphics.DrawRectangle(blackPen, r);
                     graphics.FillRectangle(blackBrush, r);
+                }
+
+
+                if (JustFired)
+                {
+                    // Можно отрисовать огонь и дым, или что пушка откатилась
                 }
             }
             catch (Exception e)
