@@ -1,0 +1,52 @@
+﻿<Window x:Class="MiniUnity_Cannon_WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MiniUnity_Cannon_WpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="ControlsColumn" Width="Auto"/>
+            <ColumnDefinition x:Name="GameColumn"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="6,6,6,6" VerticalAlignment="Top" MinWidth="120">
+            <Label Name="VelocityLabel" Content="Скорость" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            <TextBox Name="VelocityEdit" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <Slider Name="VelocitySlider" />
+            <Label Name="AngleLabel" Content="Угол" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            <TextBox Name="AngleEdit" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <Slider Name="AngleSlider" />
+            <Button Name="RunBtn" Content="Пли!" Click="RunBtn_Click"/>
+        </StackPanel>
+        <GridSplitter Width="5"></GridSplitter>
+        <Grid Grid.Column="1" x:Name="GameCanvasGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0,1">
+
+
+            <Canvas x:Name="GameCanvas">
+                <!--<Rectangle x:Name="CannonRect"  Canvas.Top="{Binding ActualHeight, ElementName=GameCanvas, Mode=OneWay}" Fill="Black" Width="30" Height="10" HorizontalAlignment="Left" VerticalAlignment="Bottom"  >
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform x:Name="RotateTransform" Angle="-45"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <Ellipse x:Name="ProjectileEllipse" Fill="Blue" Height="10" Width="10" Canvas.Top="300" Canvas.Left="50" HorizontalAlignment="Left" VerticalAlignment="Bottom"  >
+                </Ellipse>-->
+
+                <Image x:Name="Image1">
+                </Image>
+
+            </Canvas>
+
+            
+
+
+
+        </Grid>
+    </Grid>
+</Window>

@@ -44,14 +44,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MiniUnity.CannonGame.cs" />
+    <Compile Include="Cannon.cs" />
+    <Compile Include="CannonGame.cs" />
+    <Compile Include="CannonScene.cs" />
+    <Compile Include="Physics.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GameParameters.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MiniUnity\MiniUnity.csproj">
       <Project>{0c4ac688-838f-414e-bf31-741739a8177d}</Project>
       <Name>MiniUnity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CannonFired.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProjectileFlight2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProjectileFall3.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

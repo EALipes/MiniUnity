@@ -32,8 +32,7 @@ using System;
 
 namespace MiniUnity_Cannon_DesktopApp.Annotations
 {
-  /// <summary>
-  /// Indicates that the value of the marked element could be <c>null</c> sometimes,
+  /// <summary> Indicates that the value of the marked element could be <c>null</c> sometimes,
   /// so the check for <c>null</c> is necessary before its usage.
   /// </summary>
   /// <example><code>
@@ -50,8 +49,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
   public sealed class CanBeNullAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that the value of the marked element could never be <c>null</c>.
+  /// <summary> Indicates that the value of the marked element could never be <c>null</c>.
   /// </summary>
   /// <example><code>
   /// [NotNull] object Foo() {
@@ -64,8 +62,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
   public sealed class NotNullAttribute : Attribute { }
 
-  /// <summary>
-  /// Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+  /// <summary> Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
   /// and Lazy classes to indicate that the value of a collection item, of the Task.Result property
   /// or of the Lazy.Value property can never be null.
   /// </summary>
@@ -74,8 +71,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     AttributeTargets.Delegate | AttributeTargets.Field)]
   public sealed class ItemNotNullAttribute : Attribute { }
 
-  /// <summary>
-  /// Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+  /// <summary> Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
   /// and Lazy classes to indicate that the value of a collection item, of the Task.Result property
   /// or of the Lazy.Value property can be null.
   /// </summary>
@@ -84,8 +80,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     AttributeTargets.Delegate | AttributeTargets.Field)]
   public sealed class ItemCanBeNullAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that the marked method builds string by format pattern and (optional) arguments.
+  /// <summary> Indicates that the marked method builds string by format pattern and (optional) arguments.
   /// Parameter, which contains format string, should be given in constructor. The format string
   /// should be in <see cref="string.Format(IFormatProvider,string,object[])"/>-like form.
   /// </summary>
@@ -113,8 +108,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [NotNull] public string FormatParameterName { get; private set; }
   }
 
-  /// <summary>
-  /// For a parameter that is expected to be one of the limited set of values.
+  /// <summary> For a parameter that is expected to be one of the limited set of values.
   /// Specify fields of which type should be used as values for this parameter.
   /// </summary>
   [AttributeUsage(
@@ -130,8 +124,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [NotNull] public string Name { get; private set; }
   }
 
-  /// <summary>
-  /// Indicates that the function argument should be string literal and match one
+  /// <summary> Indicates that the function argument should be string literal and match one
   /// of the parameters of the caller function. For example, ReSharper annotates
   /// the parameter of <see cref="System.ArgumentNullException"/>.
   /// </summary>
@@ -144,8 +137,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class InvokerParameterNameAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that the method is contained in a type that implements
+  /// <summary> Indicates that the method is contained in a type that implements
   /// <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method
   /// is used to notify that some property value changed.
   /// </summary>
@@ -194,8 +186,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [CanBeNull] public string ParameterName { get; private set; }
   }
 
-  /// <summary>
-  /// Describes dependency between method input and output.
+  /// <summary> Describes dependency between method input and output.
   /// </summary>
   /// <syntax>
   /// <p>Function Definition Table syntax:</p>
@@ -255,8 +246,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     public bool ForceFullStates { get; private set; }
   }
 
-  /// <summary>
-  /// Indicates that marked element should be localized or not.
+  /// <summary> Indicates that marked element should be localized or not.
   /// </summary>
   /// <example><code>
   /// [LocalizationRequiredAttribute(true)]
@@ -277,8 +267,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     public bool Required { get; private set; }
   }
 
-  /// <summary>
-  /// Indicates that the value of the marked type (or its derivatives)
+  /// <summary> Indicates that the value of the marked type (or its derivatives)
   /// cannot be compared using '==' or '!=' operators and <c>Equals()</c>
   /// should be used instead. However, using '==' or '!=' for comparison
   /// with <c>null</c> is always permitted.
@@ -300,8 +289,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
   [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
   public sealed class CannotApplyEqualityOperatorAttribute : Attribute { }
 
-  /// <summary>
-  /// When applied to a target attribute, specifies a requirement for any type marked
+  /// <summary> When applied to a target attribute, specifies a requirement for any type marked
   /// with the target attribute to implement or inherit specific type or types.
   /// </summary>
   /// <example><code>
@@ -323,8 +311,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [NotNull] public Type BaseType { get; private set; }
   }
 
-  /// <summary>
-  /// Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+  /// <summary> Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
   /// so this symbol will not be marked as unused (as well as by other usage inspections).
   /// </summary>
   [AttributeUsage(AttributeTargets.All)]
@@ -350,8 +337,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     public ImplicitUseTargetFlags TargetFlags { get; private set; }
   }
 
-  /// <summary>
-  /// Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes
+  /// <summary> Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes
   /// as unused (as well as by other usage inspections)
   /// </summary>
   [AttributeUsage(AttributeTargets.Class | AttributeTargets.GenericParameter)]
@@ -385,8 +371,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     Access = 1,
     /// <summary>Indicates implicit assignment to a member.</summary>
     Assign = 2,
-    /// <summary>
-    /// Indicates implicit instantiation of a type with fixed constructor signature.
+    /// <summary> Indicates implicit instantiation of a type with fixed constructor signature.
     /// That means any unused constructor parameters won't be reported as such.
     /// </summary>
     InstantiatedWithFixedConstructorSignature = 4,
@@ -394,8 +379,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     InstantiatedNoFixedConstructorSignature = 8,
   }
 
-  /// <summary>
-  /// Specify what is considered used implicitly when marked
+  /// <summary> Specify what is considered used implicitly when marked
   /// with <see cref="MeansImplicitUseAttribute"/> or <see cref="UsedImplicitlyAttribute"/>.
   /// </summary>
   [Flags]
@@ -409,8 +393,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     WithMembers = Itself | Members
   }
 
-  /// <summary>
-  /// This attribute is intended to mark publicly available API
+  /// <summary> This attribute is intended to mark publicly available API
   /// which should not be removed and so is treated as used.
   /// </summary>
   [MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
@@ -426,16 +409,14 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [CanBeNull] public string Comment { get; private set; }
   }
 
-  /// <summary>
-  /// Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
+  /// <summary> Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
   /// If the parameter is a delegate, indicates that delegate is executed while the method is executed.
   /// If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class InstantHandleAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that a method does not make any observable state changes.
+  /// <summary> Indicates that a method does not make any observable state changes.
   /// The same as <c>System.Diagnostics.Contracts.PureAttribute</c>.
   /// </summary>
   /// <example><code>
@@ -448,8 +429,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class PureAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that the return value of method invocation must be used.
+  /// <summary> Indicates that the return value of method invocation must be used.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class MustUseReturnValueAttribute : Attribute
@@ -464,8 +444,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [CanBeNull] public string Justification { get; private set; }
   }
 
-  /// <summary>
-  /// Indicates the type member or parameter of some type, that should be used instead of all other ways
+  /// <summary> Indicates the type member or parameter of some type, that should be used instead of all other ways
   /// to get the value that type. This annotation is useful when you have some "context" value evaluated
   /// and stored somewhere, meaning that all other ways to get this value must be consolidated with existing one.
   /// </summary>
@@ -484,8 +463,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.GenericParameter)]
   public sealed class ProvidesContextAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that a parameter is a path to a file or a folder within a web project.
+  /// <summary> Indicates that a parameter is a path to a file or a folder within a web project.
   /// Path can be relative or absolute, starting from web root (~).
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
@@ -501,8 +479,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [CanBeNull] public string BasePath { get; private set; }
   }
 
-  /// <summary>
-  /// An extension method marked with this attribute is processed by ReSharper code completion
+  /// <summary> An extension method marked with this attribute is processed by ReSharper code completion
   /// as a 'Source Template'. When extension method is completed over some expression, it's source code
   /// is automatically expanded like a template at call site.
   /// </summary>
@@ -527,8 +504,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class SourceTemplateAttribute : Attribute { }
 
-  /// <summary>
-  /// Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
+  /// <summary> Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
   /// </summary>
   /// <remarks>
   /// You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
@@ -558,14 +534,12 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method, AllowMultiple = true)]
   public sealed class MacroAttribute : Attribute
   {
-    /// <summary>
-    /// Allows specifying a macro that will be executed for a <see cref="SourceTemplateAttribute">source template</see>
+    /// <summary> Allows specifying a macro that will be executed for a <see cref="SourceTemplateAttribute">source template</see>
     /// parameter when the template is expanded.
     /// </summary>
     [CanBeNull] public string Expression { get; set; }
 
-    /// <summary>
-    /// Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
+    /// <summary> Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
     /// </summary>
     /// <remarks>
     /// If the target parameter is used several times in the template, only one occurrence becomes editable;
@@ -574,8 +548,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     /// </remarks>>
     public int Editable { get; set; }
 
-    /// <summary>
-    /// Identifies the target parameter of a <see cref="SourceTemplateAttribute">source template</see> if the
+    /// <summary> Identifies the target parameter of a <see cref="SourceTemplateAttribute">source template</see> if the
     /// <see cref="MacroAttribute"/> is applied on a template method.
     /// </summary>
     [CanBeNull] public string Target { get; set; }
@@ -647,8 +620,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [NotNull] public string Format { get; private set; }
   }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+  /// <summary> ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
   /// is an MVC action. If applied to a method, the MVC action name is calculated
   /// implicitly from the context. Use this attribute for custom wrappers similar to
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
@@ -666,8 +638,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [CanBeNull] public string AnonymousProperty { get; private set; }
   }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
+  /// <summary> ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
   /// Use this attribute for custom wrappers similar to
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
   /// </summary>
@@ -684,8 +655,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [CanBeNull] public string AnonymousProperty { get; private set; }
   }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
+  /// <summary> ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
   /// an MVC controller. If applied to a method, the MVC controller name is calculated
   /// implicitly from the context. Use this attribute for custom wrappers similar to
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
@@ -703,22 +673,19 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [CanBeNull] public string AnonymousProperty { get; private set; }
   }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. Indicates that a parameter is an MVC Master. Use this attribute
+  /// <summary> ASP.NET MVC attribute. Indicates that a parameter is an MVC Master. Use this attribute
   /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class AspMvcMasterAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
+  /// <summary> ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
   /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class AspMvcModelTypeAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
+  /// <summary> ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
   /// partial view. If applied to a method, the MVC partial view name is calculated implicitly
   /// from the context. Use this attribute for custom wrappers similar to
   /// <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
@@ -726,38 +693,33 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
   public sealed class AspMvcPartialViewAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
+  /// <summary> ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
   /// </summary>
   [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
   public sealed class AspMvcSuppressViewErrorAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
+  /// <summary> ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
   /// Use this attribute for custom wrappers similar to 
   /// <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class AspMvcDisplayTemplateAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
+  /// <summary> ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
   /// Use this attribute for custom wrappers similar to
   /// <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class AspMvcEditorTemplateAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
+  /// <summary> ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
   /// Use this attribute for custom wrappers similar to
   /// <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class AspMvcTemplateAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+  /// <summary> ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
   /// is an MVC view component. If applied to a method, the MVC view name is calculated implicitly
   /// from the context. Use this attribute for custom wrappers similar to
   /// <c>System.Web.Mvc.Controller.View(Object)</c>.
@@ -765,22 +727,19 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
   public sealed class AspMvcViewAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+  /// <summary> ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
   /// is an MVC view component name.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class AspMvcViewComponentAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+  /// <summary> ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
   /// is an MVC view component view. If applied to a method, the MVC view component view name is default.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
   public sealed class AspMvcViewComponentViewAttribute : Attribute { }
 
-  /// <summary>
-  /// ASP.NET MVC attribute. When applied to a parameter of an attribute,
+  /// <summary> ASP.NET MVC attribute. When applied to a parameter of an attribute,
   /// indicates that this parameter is an MVC action name.
   /// </summary>
   /// <example><code>
@@ -817,16 +776,14 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     [NotNull] public string Name { get; private set; }
   }
 
-  /// <summary>
-  /// Razor attribute. Indicates that a parameter or a method is a Razor section.
+  /// <summary> Razor attribute. Indicates that a parameter or a method is a Razor section.
   /// Use this attribute for custom wrappers similar to 
   /// <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
   public sealed class RazorSectionAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates how method, constructor invocation or property access
+  /// <summary> Indicates how method, constructor invocation or property access
   /// over collection type affects content of the collection.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property)]
@@ -853,16 +810,14 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     UpdatedContent = ModifyExistingContent | 4
   }
 
-  /// <summary>
-  /// Indicates that the marked method is assertion method, i.e. it halts control flow if
+  /// <summary> Indicates that the marked method is assertion method, i.e. it halts control flow if
   /// one of the conditions is satisfied. To set the condition, mark one of the parameters with 
   /// <see cref="AssertionConditionAttribute"/> attribute.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class AssertionMethodAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates the condition parameter of the assertion method. The method itself should be
+  /// <summary> Indicates the condition parameter of the assertion method. The method itself should be
   /// marked by <see cref="AssertionMethodAttribute"/> attribute. The mandatory argument of
   /// the attribute is the assertion type.
   /// </summary>
@@ -877,8 +832,7 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     public AssertionConditionType ConditionType { get; private set; }
   }
 
-  /// <summary>
-  /// Specifies assertion type. If the assertion method argument satisfies the condition,
+  /// <summary> Specifies assertion type. If the assertion method argument satisfies the condition,
   /// then the execution continues. Otherwise, execution is assumed to be halted.
   /// </summary>
   public enum AssertionConditionType
@@ -893,36 +847,31 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     IS_NOT_NULL = 3,
   }
 
-  /// <summary>
-  /// Indicates that the marked method unconditionally terminates control flow execution.
+  /// <summary> Indicates that the marked method unconditionally terminates control flow execution.
   /// For example, it could unconditionally throw exception.
   /// </summary>
   [Obsolete("Use [ContractAnnotation('=> halt')] instead")]
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class TerminatesProgramAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
+  /// <summary> Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
   /// .Where). This annotation allows inference of [InstantHandle] annotation for parameters
   /// of delegate type by analyzing LINQ method chains.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class LinqTunnelAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that IEnumerable, passed as parameter, is not enumerated.
+  /// <summary> Indicates that IEnumerable, passed as parameter, is not enumerated.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class NoEnumerationAttribute : Attribute { }
 
-  /// <summary>
-  /// Indicates that parameter is regular expression pattern.
+  /// <summary> Indicates that parameter is regular expression pattern.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class RegexPatternAttribute : Attribute { }
 
-  /// <summary>
-  /// Prevents the Member Reordering feature from tossing members of the marked class.
+  /// <summary> Prevents the Member Reordering feature from tossing members of the marked class.
   /// </summary>
   /// <remarks>
   /// The attribute must be mentioned in your member reordering patterns
@@ -931,15 +880,13 @@ namespace MiniUnity_Cannon_DesktopApp.Annotations
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum)]
   public sealed class NoReorderAttribute : Attribute { }
 
-  /// <summary>
-  /// XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
+  /// <summary> XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
   /// as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
   /// </summary>
   [AttributeUsage(AttributeTargets.Class)]
   public sealed class XamlItemsControlAttribute : Attribute { }
 
-  /// <summary>
-  /// XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that
+  /// <summary> XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that
   /// is used to bind some item of <c>ItemsControl</c>-derived type. This annotation will
   /// enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
   /// </summary>

@@ -1,0 +1,14 @@
+<ArchitectureGraph>
+  <Module Identifier="9BCEEE6E-3826-40DD-AA2E-F0DC175C90A7" Name="MiniUnity_Cannon_DesktopApp" />
+  <Module Identifier="CF23E177-3D54-4898-B020-A73C1B2529F8" Name="MiniUnity.CannonGame" />
+  <Module Identifier="0C4AC688-838F-414E-BF31-741739A8177D" Name="MiniUnity" />
+  <Module Identifier="BAD6FF74-445B-419B-8700-7C8F3B28398B" Name="MiniUnity_Cannon_ConsoleApp" />
+  <Module Identifier="A188BFBF-A306-4ABA-9887-F20B6F3B56DF" Name="MiniUnity_Cannon_WpfApp" />
+  <Reference Identifier="CF23E177-3D54-4898-B020-A73C1B2529F8/r:MiniUnity" SourceId="CF23E177-3D54-4898-B020-A73C1B2529F8" Name="MiniUnity" TargetId="0C4AC688-838F-414E-BF31-741739A8177D" />
+  <Reference Identifier="9BCEEE6E-3826-40DD-AA2E-F0DC175C90A7/r:MiniUnity.CannonGame" SourceId="9BCEEE6E-3826-40DD-AA2E-F0DC175C90A7" Name="MiniUnity.CannonGame" TargetId="CF23E177-3D54-4898-B020-A73C1B2529F8" />
+  <Reference Identifier="9BCEEE6E-3826-40DD-AA2E-F0DC175C90A7/r:MiniUnity" SourceId="9BCEEE6E-3826-40DD-AA2E-F0DC175C90A7" Name="MiniUnity" TargetId="0C4AC688-838F-414E-BF31-741739A8177D" />
+  <Reference Identifier="BAD6FF74-445B-419B-8700-7C8F3B28398B/r:MiniUnity" SourceId="BAD6FF74-445B-419B-8700-7C8F3B28398B" Name="MiniUnity" TargetId="0C4AC688-838F-414E-BF31-741739A8177D" />
+  <Reference Identifier="BAD6FF74-445B-419B-8700-7C8F3B28398B/r:MiniUnity.CannonGame" SourceId="BAD6FF74-445B-419B-8700-7C8F3B28398B" Name="MiniUnity.CannonGame" TargetId="CF23E177-3D54-4898-B020-A73C1B2529F8" />
+  <Reference Identifier="A188BFBF-A306-4ABA-9887-F20B6F3B56DF/r:MiniUnity" SourceId="A188BFBF-A306-4ABA-9887-F20B6F3B56DF" Name="MiniUnity" TargetId="0C4AC688-838F-414E-BF31-741739A8177D" />
+  <Reference Identifier="A188BFBF-A306-4ABA-9887-F20B6F3B56DF/r:MiniUnity.CannonGame" SourceId="A188BFBF-A306-4ABA-9887-F20B6F3B56DF" Name="MiniUnity.CannonGame" TargetId="CF23E177-3D54-4898-B020-A73C1B2529F8" />
+</ArchitectureGraph>
