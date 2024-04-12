@@ -46,32 +46,13 @@ namespace MiniUnity.CannonGame
         public void Fire(Projectile projectile, float elevationAngle, float velocityScalar)
         {
             JustFired = true;
+            projectile.Position = Position;
             RefreshDraw();
             if (Game.PlaySound)
-                //SoundPlayerGunFired.Play();
-                //new SoundPlayer( Resources.CannonFiredAndProjectileFlies).Play();
                 cannonFiresSoundPlayer.PlaySync();
 
             projectile.Fired(elevationAngle, velocityScalar);
-
-            //// Отрисовываем снаряд на месте пуска
-            //projectile.Update();
-
-            ////projectile.Fallen = false;
-            //////projectile
-            //Console.WriteLine("Бабах!");
-
-
-            projectile.Position = Position;
-
-            //var elevationAngleInRadians = elevationAngle * Math.PI / 180;
-
-            //var velocity = projectile.Velocity;
-            //velocity.X = (float) (velocityScalar * Math.Cos(elevationAngleInRadians));
-            //velocity.Y = (float) (velocityScalar * Math.Sin(elevationAngleInRadians));
-            //projectile.Velocity = velocity;
         }
-
 
 
         public void Fire()
@@ -79,18 +60,6 @@ namespace MiniUnity.CannonGame
             Fire(Projectile, ElevationAngle, Velocity);
         }
 
-        /// <summary> 
-        /// </summary>
-        /// <param name="projectile">Снаряд, которым будем стрелять</param>
-        /// <param name="elevationAngle">Угол возвышения в градусах</param>
-        /// <param name="velocity">Скорость снаряда</param>
-        public void Load(Projectile projectile, float elevationAngle, float velocity)
-        {
-            // Надо???
-            Projectile = projectile;
-            ElevationAngle = elevationAngle;
-            Velocity = velocity;
-        }
         
         /// <summary> Скорость снаряда
         /// </summary>

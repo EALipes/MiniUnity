@@ -24,8 +24,7 @@ namespace MiniUnity.CannonGame
             if (Cannon==null) throw new NullReferenceException("Не найден объект Cannon");
             Projectile = GetComponent<Projectile>() as Projectile; 
 
-            Cannon.Load(Projectile, Game.Angle, Game.Velocity);
-            Cannon.Fire();
+            Cannon.Fire(Projectile, Game.Angle, Game.Velocity);
         }
 
         public override void Update()

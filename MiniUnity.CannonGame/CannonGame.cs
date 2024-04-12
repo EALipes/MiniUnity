@@ -12,13 +12,6 @@
             Scene.AddComponent(projectile);
         }
 
-        //// TODO: Как задать начальный выстрел из пушки без перекрытия метода Play?
-        //public override void Play()
-        //{
-        //    // TODO: Как задать начальный выстрел из пушки без перекрытия метода Play?
-        //    cannon.Fire(projectile, Angle, Velocity);
-        //    base.Play();
-        //}
 
         protected Cannon cannon { get; set; }
         protected Projectile projectile { get; set; } //TODO: Может, убрать это? Пусть при каждом выстреле создается новое ядро?
@@ -30,7 +23,9 @@
         /// </summary>
         public float ScreenScale { get; set; }
 
-        // Проигрывать звуки?
+        /// <summary> Проигрывать звуки?
+        /// 
+        /// </summary>
         public bool PlaySound { get; set; }
     }
 }
