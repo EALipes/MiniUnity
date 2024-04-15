@@ -45,7 +45,6 @@ namespace MiniUnity.CannonGame
         /// <param name="velocityScalar">Скорость снаряда</param>
         public void Fire(Projectile projectile, float elevationAngle, float velocityScalar)
         {
-            Projectile = projectile; //TODO: нужно ли вообще это свойство?
             ElevationAngle = elevationAngle;
             Velocity = velocityScalar;
 
@@ -60,11 +59,6 @@ namespace MiniUnity.CannonGame
         }
 
 
-        public void Fire()
-        {
-            Fire(Projectile, ElevationAngle, Velocity);
-        }
-
         
         /// <summary> Скорость снаряда
         /// </summary>
@@ -73,8 +67,6 @@ namespace MiniUnity.CannonGame
         /// <summary> Угол возвышения (в градусах)
         /// </summary>
         public float ElevationAngle { get; set; }
-
-        public Projectile Projectile { get; set; }
 
         public override void Update()
         {

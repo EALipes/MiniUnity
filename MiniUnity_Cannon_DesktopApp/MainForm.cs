@@ -138,6 +138,7 @@ namespace MiniUnity_Cannon_DesktopApp
             try
             {
                 game.Play();
+                GameParams.GetGameSettings(game);
             }
             finally
             {
@@ -146,80 +147,6 @@ namespace MiniUnity_Cannon_DesktopApp
 
         }
 
-
-        #region Отрисовка
-        
-        ///// <summary> При вызове обновления экрана из игры должно вызываться вот это.
-        ///// </summary>
-        ////TODO! По идее, это надо делать на уровне настроек игры на платформу.
-        //private void CallScreenRefresh()
-        //{
-        //    GameCanvasPanel.Refresh();
-        //}
-
-
-
-        ///// <summary>
-        ///// Событие отрисовки, привязанное к панели игры
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void GameCanvasPanel_Paint(object sender, PaintEventArgs e)
-        //{
-        //    base.OnPaint(e);
-        //    PaintGameScreen(e.Graphics);
-        //    var projectile = game?.projectile;
-        //    if (projectile == null) return;
-        //    //projectile.Draw_OnPaintOnWinFormsEvent(sender, e);
-        //}
-
-        ///// <summary>
-        ///// Наша функция для отрисовки игры
-        ///// </summary>
-        ///// <param name="graphics">Графический контекст, получаемый из события Paint</param>
-        //protected void PaintGameScreen(Graphics graphics)
-        //{
-        //    try
-        //    {
-        //        Pen bluePen = new Pen(Color.Blue, 3);
-        //        Brush blueBrush = new SolidBrush(Color.Blue);
-        //        Pen redPen = new Pen(Color.Red, 2);
-        //        Pen blackPen = new Pen(Color.Black);
-
-        //        // Масштаб экрана - в мм
-        //        graphics.PageUnit = GraphicsUnit.Millimeter;
-
-        //        var projectileRectSize = 5;
-        //        // координаты ядра (в метрах)
-        //        var prX = (float) game.projectile.Position.X;
-        //        var prY = (float) game.projectile.Position.Y;
-        //        // отмасштабируем эти координаты, чтоб все вместилось в экран
-        //        // масштаб мы задаем в метрах на сантиметр, а экран у нас меряется в миллиметрах (GraphicsUnit.Millimeter)
-        //        prX = prX * 10 / GameParams.GameScreenScale;
-        //        prY = prY * 10 / GameParams.GameScreenScale;
-        //        // учтем размер рисуемого прямоугольника, и соответственно сместим его начало
-        //        // учтем, что началом координаты Y у нас должен быть конец (нижний) экрана
-        //        // и что координата Y в игре направлена вверх, а у нас на экране - вниз
-        //        var screenHeight = graphics.VisibleClipBounds.Height;
-        //        var screenX = prX;
-        //        var screenY = screenHeight - projectileRectSize - prY;
-        //        if ((screenX < 0) || (screenX > graphics.VisibleClipBounds.Width) || (screenY < 0) || (screenY > graphics.VisibleClipBounds.Height))
-        //        {
-        //            return;
-        //        }
-        //        RectangleF r = new RectangleF(screenX, screenY, projectileRectSize, projectileRectSize);
-        //        graphics.DrawEllipse(bluePen, r);
-        //        graphics.FillEllipse(blueBrush, r);
-
-        //        //Debug.WriteLine(r);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Debug.WriteLine("Ошибка отрисовки");
-        //    }
-        //}
-
-        #endregion
 
         #region События редактирования данных
 

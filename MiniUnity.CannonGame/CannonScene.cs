@@ -69,8 +69,8 @@ namespace MiniUnity.CannonGame
             // Пробел - пуск/останов времени в игре
             if (
                 (e.KeyChar == ' ')
-                ||
-                (e.KeyChar == '\0')
+                //||
+                //(e.KeyChar == '\0')
                 )
                 // пуск-стоп
             {
@@ -140,36 +140,6 @@ namespace MiniUnity.CannonGame
             base.ProcessKey(e);
         }
 
-        private void CheckKeyboardCommands()
-        {
-            // TODO: Это сделать изменяемым в зависимости от типа приложения!
-            /*
-            if (Console.KeyAvailable)
-            {
-                var key = Console.ReadKey();
-                if (key.KeyChar == ' ')
-                    // пуск-стоп
-                {
-                    //IsStopped = !IsStopped;
-                    if (!Game.Orchestrator.Stopped) 
-                        Game.Orchestrator.Stop();
-                    else
-                        Game.Orchestrator.Resume();
-                }
-
-                if (
-                    key.Key == ConsoleKey.Escape
-                    ||
-                    (key.KeyChar == 'x')||(key.KeyChar == 'X')||(key.KeyChar == 'ч')||(key.KeyChar == 'Ч')
-                    )
-
-                {
-                    // Esc - выход из игры
-                    // Пока просто указываем флаг завершения сцены
-                    IsOver = true;
-                }
-            }
-            */
         }
     }
 }

@@ -127,6 +127,10 @@ namespace MiniUnity
 
         #region Отрисовка
 
+        /// <summary> Элемент управления, принимающий клавиатурные события, и передающий их игре.
+        /// (Сейчас устанавливаем его в окно. Панель почему-то не имеет соотв. событий.)
+        /// События клавиатуры передаются игре обработчиками DoOnKeyPress и DoOnKeyDown, унаследованными от GameObject.
+        /// </summary>
         public System.Windows.Forms.Control KeyboardEventsControl
         {
             get
@@ -151,16 +155,6 @@ namespace MiniUnity
             }
         }
         private System.Windows.Forms.Control _keyboardEventsControl;
-
-        protected override void DoOnKeyPress(object sender, KeyPressEventArgs e)
-        {
-            base.DoOnKeyPress(sender, e);
-        }
-
-        protected override void DoOnKeyDown(object sender, KeyEventArgs e)
-        {
-            base.DoOnKeyDown(sender, e);
-        }
 
         #region Winforms
 

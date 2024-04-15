@@ -20,7 +20,6 @@
                 return ((CannonScene) Scene).Cannon;
             }
         }
-        //protected Projectile projectile { get; set; } //TODO: Может, убрать это? Пусть при каждом выстреле создается новое ядро?
 
         public float Velocity {
             get

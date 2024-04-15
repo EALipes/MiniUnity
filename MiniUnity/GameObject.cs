@@ -138,12 +138,12 @@ namespace MiniUnity
         /// </summary>
         public virtual void Update()
         {
+            // Теоретически, обработку клавиатурных событий мы могли бы разместить и здесь.
+            // Но лучше перехватим это одним объектом на самом верхнем уровне иерархии,
+            // чтоб не тормозить работу лишними вызовами.
             //GetAndProcessKeyboardEvents();
 
-            //var gameKeyEventArgs = GetKeyAvailable();
-            //if (gameKeyEventArgs!=null)
-            //    ProcessKey(gameKeyEventArgs);
-
+            // Обновляем дочерние объекты
             foreach (GameObject c in Children.ToArray())
             {
                 c.Update();
