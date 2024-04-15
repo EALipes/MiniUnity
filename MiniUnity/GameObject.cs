@@ -12,7 +12,7 @@ namespace MiniUnity
 
         /// <summary> Родительский объект
         /// </summary>
-        public GameObject Parent { get; set; }
+        public GameObject Parent { get; private set; }
 
         /// <summary> Вложенные объекты, подчиняющиеся текущему
         /// </summary>
