@@ -63,7 +63,6 @@ namespace MiniUnity.CannonGame
 
             // Если снаряд не летит - он лежит где был, нечего обновлять.
             if (!Flying) return;
-            //if (Fallen) return;
 
             // Прошло времени с прошлого обновления
             float dT = Game.Orchestrator.TimeDeltaFromLastUpdateInSeconds;
@@ -134,10 +133,13 @@ namespace MiniUnity.CannonGame
             position.Y = 0;
             Position = position;
             Velocity=Vector3.Zero;
+            
+            // Больше ядро не летит, поэтому лежит себе на месте, и обновлять его и перерисовывать больше не нужно.
+            Flying = false;
+
 
             
             //Console.WriteLine("Шлёп!"); // Перенесено в Draw()
-            //Fallen = true;
             JustFallen = true; // Надо один раз отрисовать Шлеп! и брызги.
             // И издать звук - это мы можем пока сделать здесь.
             if (Game.PlaySound)
@@ -145,7 +147,7 @@ namespace MiniUnity.CannonGame
 
 
             // Если ядро упало - игра окончена.
-            Scene.IsOver = true;
+            //Scene.IsOver = true;
         }
 
 

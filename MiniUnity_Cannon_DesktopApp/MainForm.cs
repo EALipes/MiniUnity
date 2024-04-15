@@ -26,15 +26,6 @@ namespace MiniUnity_Cannon_DesktopApp
 
             InitializeComponent();
 
-            //// Звуки
-            //SoundPlayerGunFired = new SoundPlayer(Properties.Resources.CannonFiredAndProjectileFlies);
-            ////SoundPlayerGunFired = new SoundPlayer(Properties.Resources.CannonFired);
-            //SoundPlayerGunFired.Load();
-            //SoundPlayerFlight = new SoundPlayer(Properties.Resources.ProjectileFlight1);
-            //SoundPlayerFlight.Load();
-            //SoundPlayerFall = new SoundPlayer(Properties.Resources.ProjectileFall3);
-            //SoundPlayerFall.Load();
-
 
             //// События редактирования настроек игры
             //// Изменение параметров при ручном редактировании элементов управления
@@ -83,15 +74,21 @@ namespace MiniUnity_Cannon_DesktopApp
             this.FramePerSecEdit.DataBindings.Add(bFPS); //ValueChanged += new System.EventHandler(this.FramePerSecEdit_ValueChanged);
 
 
+            // Обработка клавиатуры
+            //KeyPress -= MainForm_KeyPress;
+            //GameCanvasPanel.KeyPress += MainForm_KeyPress;
+            //KeyDown -= MainForm_KeyDown;
+            //GameCanvasPanel.KeyDown += MainForm_KeyDown;
+
+
             // Инициализация игры
             // (В консольном приложении это сделано в Main(), тут удобнее это  сделать при инициализации главной формы.
             game = new CannonGame();
-            //game.projectile.OnCallScreenRefresh = CallScreenRefresh;
-            //game.projectile.Start(); //DEBUG //только для инициализации, пока не налажен механизм вызова Paint через объект Game и Scene
-            //GameCanvasPanel.Paint += game.projectile.Draw_OnPaintOnWinFormsEvent;
+            GameObject.AppType = GameObject.ApplicationType.WinFormsApp;
             // настройка отображения игры в панели
             game.GamePanel = GameCanvasPanel;
-            GameObject.AppType = GameObject.ApplicationType.WinFormsApp;
+            // настройка получения клавиатурных нажатий
+            game.KeyboardEventsControl = this;
         }
 
         #region Параметры игры
@@ -275,7 +272,25 @@ namespace MiniUnity_Cannon_DesktopApp
 
         private void GameCanvasPanel_Paint(object sender, PaintEventArgs e)
         {
-            var paintcalled = true;
+            //var paintcalled = true;
+        }
+
+        private void GameCanvasPanel_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //e.
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show("Нажата клавиша " + e.KeyCode +"   "+ e.KeyValue + " " + e.Modifiers);
+            //e.Handled = true;
+        }
+
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //MessageBox.Show("Нажата клавиша " + e.KeyChar);
+
+            //e.Handled = true;
         }
     }
 

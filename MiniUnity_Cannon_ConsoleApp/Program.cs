@@ -21,11 +21,14 @@ namespace MiniUnity_Cannon_ConsoleApp
             var gameParams = new GameParameters();
 
             // Задаем параметры игры через GameParameters
+            gameParams.GetGameSettings(game);
             gameParams.Speed = 100;
             gameParams.Angle = 45;
+            gameParams.SetGameSettings(game);
 
             while (true)
             {
+                gameParams.GetGameSettings(game);
                 ShowGameSettings(gameParams);
                 gameParams.SetGameSettings(game);
                 game.Play();
@@ -75,7 +78,6 @@ namespace MiniUnity_Cannon_ConsoleApp
         /// <param name="gameParams"> </param>
         public static void ShowGameSettings(GameParameters gameParams)
         {
-
             Console.WriteLine("Параметры игры:");
             Console.WriteLine("---------------");
 

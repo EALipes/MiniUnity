@@ -45,13 +45,18 @@ namespace MiniUnity.CannonGame
         /// <param name="velocityScalar">Скорость снаряда</param>
         public void Fire(Projectile projectile, float elevationAngle, float velocityScalar)
         {
-            JustFired = true;
+            Projectile = projectile; //TODO: нужно ли вообще это свойство?
+            ElevationAngle = elevationAngle;
+            Velocity = velocityScalar;
+
             projectile.Position = Position;
             RefreshDraw();
             if (Game.PlaySound)
                 cannonFiresSoundPlayer.PlaySync();
 
             projectile.Fired(elevationAngle, velocityScalar);
+
+            JustFired = true;
         }
 
 
@@ -91,7 +96,11 @@ namespace MiniUnity.CannonGame
         {
             if (AppType == ApplicationType.ConsoleApp)
             {
-                var s = this.GetType().Name + ":  X=" + Position.X.ToString("F1") + " Y=" + Position.Y.ToString("F1");
+                var s = this.GetType().Name + 
+                        ":  X=" + Position.X.ToString("F1") + " Y=" + Position.Y.ToString("F1") + 
+                        " " +nameof(ElevationAngle)+"=" + ElevationAngle + 
+                        " "+ nameof(Velocity) + "=" + Velocity.ToString("F1");
+                Console.WriteLine(s);
                 if (JustFired)
                     Console.WriteLine("Бабах!");
             }
@@ -166,20 +175,20 @@ namespace MiniUnity.CannonGame
                 //    graphics.DrawRectangle(myPen2, 150, 50, 20, 10);
                 //}
 
-            //// Вот так получается прямоугольник повернутый, но не там
-            //    {
-            //        graphics.ResetTransform();
-            //        GraphicsPath rectPath = new GraphicsPath();
-            //        rectPath.AddRectangle(r);
-            //        //rectPath.AddRectangle(new RectangleF(0, 0, cannonLength, cannonDiameter));
-            //        var transformMatrix = new Matrix();
-            //        //transformMatrix.Translate(0, screenHeight);
-            //        transformMatrix.Rotate(-ElevationAngle);
-            //        rectPath.Transform(transformMatrix);
+                //// Вот так получается прямоугольник повернутый, но не там
+                //    {
+                //        graphics.ResetTransform();
+                //        GraphicsPath rectPath = new GraphicsPath();
+                //        rectPath.AddRectangle(r);
+                //        //rectPath.AddRectangle(new RectangleF(0, 0, cannonLength, cannonDiameter));
+                //        var transformMatrix = new Matrix();
+                //        //transformMatrix.Translate(0, screenHeight);
+                //        transformMatrix.Rotate(-ElevationAngle);
+                //        rectPath.Transform(transformMatrix);
 
-            //        graphics.DrawPath(blackPen, rectPath);
-            //        graphics.FillPath(blackBrush, rectPath);
-            //    }
+                //        graphics.DrawPath(blackPen, rectPath);
+                //        graphics.FillPath(blackBrush, rectPath);
+                //    }
 
                 // Вот так получается прямоугольник повернутый, и там где надо
                 {
@@ -205,22 +214,22 @@ namespace MiniUnity.CannonGame
                 //graphics.FillRectangle(blackBrush, r);
                 //}
 
-                // Вот так получается ...
-                // В графике положительный угол почему-то считается по часовой стрелке, а не влево, как в математике.
-                {
-                    graphics.ResetTransform();
-                  
-
-                    //graphics.Transform.Rotate(-ElevationAngle);
-                    // вместо этого:
-                    Matrix myMatrix = new Matrix();
-                    myMatrix.Rotate(45, MatrixOrder.Append);
-                    graphics.Transform = myMatrix;
+                //// Вот так получается пушку вообще не видно
+                //// В графике положительный угол почему-то считается по часовой стрелке, а не влево, как в математике.
+                //{
+                //    graphics.ResetTransform();
 
 
-                    graphics.DrawRectangle(blackPen, r);
-                    graphics.FillRectangle(blackBrush, r);
-                }
+                //    //graphics.Transform.Rotate(-ElevationAngle);
+                //    // вместо этого:
+                //    Matrix myMatrix = new Matrix();
+                //    myMatrix.Rotate(45, MatrixOrder.Append);
+                //    graphics.Transform = myMatrix;
+
+
+                //    graphics.DrawRectangle(blackPen, r);
+                //    graphics.FillRectangle(blackBrush, r);
+                //}
 
 
                 if (JustFired)

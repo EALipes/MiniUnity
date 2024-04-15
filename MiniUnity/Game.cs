@@ -99,12 +99,6 @@ namespace MiniUnity
             if (Scene == null) throw new NullReferenceException("Не определено отыгрываемых сцен");
 
             Start();
-            //// Вместо всего этого:
-            //game.IsOver = false;
-            //scene.IsOver = false;
-
-            //Orchestrator.Start();
-            //Scene.Start();
 
             RefreshDraw();
             
@@ -133,6 +127,41 @@ namespace MiniUnity
 
         #region Отрисовка
 
+        public System.Windows.Forms.Control KeyboardEventsControl
+        {
+            get
+            {
+                return _keyboardEventsControl;
+
+            }
+            set
+            {
+                if (_keyboardEventsControl != null)
+                {
+                    _keyboardEventsControl.KeyPress -= DoOnKeyPress;
+                    _keyboardEventsControl.KeyDown -= DoOnKeyDown;
+                }
+
+                _keyboardEventsControl = value;
+                if (_keyboardEventsControl != null)
+                {
+                    _keyboardEventsControl.KeyPress += DoOnKeyPress;
+                    _keyboardEventsControl.KeyDown += DoOnKeyDown;
+                }
+            }
+        }
+        private System.Windows.Forms.Control _keyboardEventsControl;
+
+        protected override void DoOnKeyPress(object sender, KeyPressEventArgs e)
+        {
+            base.DoOnKeyPress(sender, e);
+        }
+
+        protected override void DoOnKeyDown(object sender, KeyEventArgs e)
+        {
+            base.DoOnKeyDown(sender, e);
+        }
+
         #region Winforms
 
         /// <summary> Панель или др. видимый элемент, на котором будет отображаться графика игры
@@ -147,12 +176,17 @@ namespace MiniUnity
             set
             {
                 if (_gamePanel != null)
+                {
                     //_gamePanel.Paint -= Scene.Draw_OnWinFormsPaintEvent;
                     _gamePanel.Paint -= Draw_OnWinFormsPaintEvent;
+                }
+
                 _gamePanel = value;
                 if (_gamePanel != null)
+                {
                     //_gamePanel.Paint += Scene.Draw_OnWinFormsPaintEvent;
                     _gamePanel.Paint += Draw_OnWinFormsPaintEvent;
+                }
             }
         }
         private System.Windows.Forms.Control _gamePanel;

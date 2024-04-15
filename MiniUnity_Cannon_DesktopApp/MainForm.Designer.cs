@@ -283,6 +283,7 @@ namespace MiniUnity_Cannon_DesktopApp
             this.GameCanvasPanel.Size = new System.Drawing.Size(937, 674);
             this.GameCanvasPanel.TabIndex = 2;
             this.GameCanvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GameCanvasPanel_Paint);
+            this.GameCanvasPanel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.GameCanvasPanel_PreviewKeyDown);
             // 
             // MainForm
             // 
@@ -295,6 +296,8 @@ namespace MiniUnity_Cannon_DesktopApp
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "Игра \"Пушка\"";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
             this.ControlPanel.ResumeLayout(false);
             this.ControlPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VelocityTrackBar1)).EndInit();
