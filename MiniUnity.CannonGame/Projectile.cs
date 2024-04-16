@@ -222,6 +222,9 @@ namespace MiniUnity.CannonGame
                 RectangleF r = new RectangleF(screenX, screenY, projectileRectSize, projectileRectSize);
                 graphics.DrawEllipse(bluePen, r);
                 graphics.FillEllipse(blueBrush, r);
+
+                // Вызываем унаследованный метод
+                base.Draw_OnWinFormsPaintEvent(sender, args);
             }
             catch (Exception e)
             {

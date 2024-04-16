@@ -228,6 +228,10 @@ namespace MiniUnity.CannonGame
                 {
                     // Можно отрисовать огонь и дым, или что пушка откатилась
                 }
+
+
+                // Вызываем унаследованный метод
+                base.Draw_OnWinFormsPaintEvent(sender, args);
             }
             catch (Exception e)
             {
