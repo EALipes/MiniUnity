@@ -6,6 +6,7 @@ namespace MiniUnity.CannonGame
     {
         public Cannon Cannon { get; set; }
         protected Projectile Projectile;
+
         protected CannonGame Game
         {
             get { return (this.Parent as CannonGame); }
@@ -41,27 +42,15 @@ namespace MiniUnity.CannonGame
 
         public override void Update()
         {
-            // Сделаем обработку ввода с клавиатуры
-            // По идее, это неправильно. Для этого должен бы быть какой-то специальный метод, в специальном месте, 
-            // но я еще не придумал куда вставить управление игрой...
-            // TODO: Перенести обработку клавиатурных команд в GameObject.Update() или в Scene..Update(), а тут только перекрыть их обработку
-            //
-            //CheckKeyboardCommands();
-            GetAndProcessKeyboardEvents();
+            //// Сделаем обработку ввода с клавиатуры
+            //GetAndProcessKeyboardEvents();
 
-            // Если время остановлено - нечего тут обновлять, выходим
-            // TODO: Надо ли это тут? Может, перенести в Scene?
-            // TODO: Может, это вообще не нужно???
-            if (Game.Orchestrator.Stopped) 
-                return;
+            //// Если время остановлено - нечего тут обновлять, выходим
+            //if (Game.Orchestrator.Stopped) 
+            //    return;
 
             //Console.WriteLine(DateTime.Now.Minute+":"+DateTime.Now.Second+"."+DateTime.Now.Millisecond);
             base.Update();
-
-            // ! Перенесено в Projectile
-            // Если ядро упало - игра окончена.
-            //if (Projectile.Fallen)
-            //    IsOver = true;
         }
 
         protected override void ProcessKey(GameKeyEventArgs e)
