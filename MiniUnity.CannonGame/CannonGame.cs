@@ -4,12 +4,7 @@
     {
         public CannonGame()
         {
-            //FramesPerSecond = CannonGameFramesPerSecond;
             Scene=new CannonScene();
-            //cannon = new Cannon();
-            ////projectile = new Projectile();
-            //Scene.AddComponent(cannon);
-            //Scene.AddComponent(projectile);
         }
 
 

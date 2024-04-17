@@ -5,7 +5,6 @@ namespace MiniUnity.CannonGame
     public class CannonScene : Scene
     {
         public Cannon Cannon { get; set; }
-        protected Projectile Projectile;
 
         protected CannonGame Game
         {
@@ -31,39 +30,20 @@ namespace MiniUnity.CannonGame
 
         private void CannonFire()
         {
-            //Projectile = GetComponent<Projectile>() as Projectile; 
-            Projectile = new Projectile();
-            AddComponent(Projectile);
-            Projectile.Start(); // Иначе он не находит параметров игры
-            // TODO: Надо бы как-то уменьшить зависимости между Projectile и Game
-
-            Cannon.Fire(Projectile, Game.Angle, Game.Velocity);
+            var projectile = new Projectile();
+            AddComponent(projectile);
+            projectile.Start(); // Иначе он не находит параметров игры
+            
+            Cannon.Fire(projectile, Cannon.ElevationAngle, Cannon.Velocity);
+            //Cannon.Fire(projectile, Game.Angle, Game.Velocity);
         }
 
-        public override void Update()
-        {
-            //// Сделаем обработку ввода с клавиатуры
-            //GetAndProcessKeyboardEvents();
-
-            //// Если время остановлено - нечего тут обновлять, выходим
-            //if (Game.Orchestrator.Stopped) 
-            //    return;
-
-            //Console.WriteLine(DateTime.Now.Minute+":"+DateTime.Now.Second+"."+DateTime.Now.Millisecond);
-            base.Update();
-        }
 
         protected override void ProcessKey(GameKeyEventArgs e)
         {
             // Пробел - пуск/останов времени в игре
-            if (
-                (e.KeyChar == ' ')
-                //||
-                //(e.KeyChar == '\0')
-                )
-                // пуск-стоп
+            if (e.KeyChar == ' ')
             {
-                //IsStopped = !IsStopped;
                 if (!Game.Orchestrator.Stopped) 
                     Game.Orchestrator.Stop();
                 else
@@ -129,6 +109,6 @@ namespace MiniUnity.CannonGame
             base.ProcessKey(e);
         }
 
-        }
+        
     }
 }
