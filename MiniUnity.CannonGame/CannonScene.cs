@@ -27,7 +27,7 @@ namespace MiniUnity.CannonGame
             
             CannonFire();
         }
-
+          
         private void CannonFire()
         {
             var projectile = new Projectile();
