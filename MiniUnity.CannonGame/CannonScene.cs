@@ -5,6 +5,7 @@ namespace MiniUnity.CannonGame
     public class CannonScene : Scene
     {
         public Cannon Cannon { get; set; }
+        public Target Target { get; set; }
 
         protected CannonGame Game
         {
@@ -15,6 +16,9 @@ namespace MiniUnity.CannonGame
         {
             Cannon = new Cannon();
             AddComponent(Cannon);
+
+            Target = new Target();
+            AddComponent(Target);
         }
 
 
@@ -27,7 +31,7 @@ namespace MiniUnity.CannonGame
             
             CannonFire();
         }
-
+          
         private void CannonFire()
         {
             var projectile = new Projectile();
