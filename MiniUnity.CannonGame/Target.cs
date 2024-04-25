@@ -46,7 +46,7 @@ namespace MiniUnity.CannonGame
             //берем из сцены положение снаряда
             //Projectile projectile = Scene.GetComponent<Projectile>;
             //Vector3 projectilePosition = projectile.Position;
-
+            //или так
             /*
             Vector3 projectilePosition = Scene.GetComponent<Projectile>.Position;
 
