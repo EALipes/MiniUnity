@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniUnity_Cannon_ConsoleApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniUnity_Cannon_WpfApp", "MiniUnity_Cannon_WpfApp\MiniUnity_Cannon_WpfApp.csproj", "{A188BFBF-A306-4ABA-9887-F20B6F3B56DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniUnity.IOCContainer", "MiniUnity.IOCContainer\MiniUnity.IOCContainer.csproj", "{355BD11E-AD94-4C9D-9DB4-2FD435579C80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{A188BFBF-A306-4ABA-9887-F20B6F3B56DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A188BFBF-A306-4ABA-9887-F20B6F3B56DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A188BFBF-A306-4ABA-9887-F20B6F3B56DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{355BD11E-AD94-4C9D-9DB4-2FD435579C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{355BD11E-AD94-4C9D-9DB4-2FD435579C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{355BD11E-AD94-4C9D-9DB4-2FD435579C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{355BD11E-AD94-4C9D-9DB4-2FD435579C80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
