@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniUnity.IOCContainer
+namespace MiniUnity.IOC
 {
     // Примерно такое было в Unity
     public interface IContainer : IDisposable
