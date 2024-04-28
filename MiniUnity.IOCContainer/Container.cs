@@ -132,7 +132,7 @@ namespace MiniUnity.IOC
         /// <param name="type"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public object Resolve(Type type, string name)
+        public object Resolve(Type type, string name=null)
         {
             var e = FindRegisteredType(type, name);
             if (e == null)

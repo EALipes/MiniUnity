@@ -47,12 +47,37 @@ namespace Tests
             var container = new Container();
             container.RegisterType(typeof(IDrawProjectiles), typeof(ProjectileDrawer));
             var registered = container.IsRegistered(typeof(IDrawProjectiles), null);
-            Assert.IsTrue(registered, "Не зарегистрирован IDrawProjectiles");
+            // TODO: А где нам узнать, есть ли какие-то реализации для вот такого интерфейса?
+            // TODO: А если один класс реализует два интерфейса? И зарегистрирован как реализатор первого, а нам он нужен для второго?
+            Assert.IsFalse(registered, "Не должен быть зарегистрирован IDrawProjectiles");
+            
             var registered2 = container.IsRegistered(typeof(ProjectileDrawer), null);
             Assert.IsTrue(registered2, "Не зарегистрирован ProjectileDrawer");
             var registered3 = container.IsRegistered(typeof(ProjectileDrawerColored), null);
-            Assert.IsTrue(registered3, "Не зарегистрирован ProjectileDrawerColored");
+            Assert.IsFalse(registered3, "Не должен быть зарегистрирован ProjectileDrawerColored");
         }
+
+        [TestMethod]
+        public void TestRegisterType_()
+        {
+            var container = new Container();
+            var abstractionType = typeof(IDrawProjectiles);
+            container.RegisterType(abstractionType, typeof(ProjectileDrawer));
+            var obj = container.Resolve(abstractionType);
+
+            // TODO: А как насчет типизованного метода (вероятно, параметризованного)?
+            // TODO: А нужен ли нам вообще этот слабо типизованный метод?
+            // TODO: Наверное, нужна проверка, что реализация соответствует абстрактному интерфейсу?
+            
+            // TODO: А как насчет создания незаригистрированного неабстрактного типа?
+            
+            // TODO: А как насчет создания неабстрактного типа, требующего в конструкторе параметр абстрактного типа ?
+
+            // TODO: Проверить работу с Singleton
+
+
+        }
+
 
     }
 
