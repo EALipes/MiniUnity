@@ -112,7 +112,8 @@ namespace MiniUnity.IOC
         {
             foreach (var element in Registrations)
             {
-                if (element.ImplementationType == type)
+                if (element.AbstractionType == type)
+                //if (element.ImplementationType == type)
                 {
                     if ( (String.IsNullOrWhiteSpace(name)) && (String.IsNullOrWhiteSpace(element.Name)) )
                         return element;
