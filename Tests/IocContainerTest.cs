@@ -58,12 +58,13 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestRegisterType_()
+        public void TestResolve()
         {
             var container = new Container();
             var abstractionType = typeof(IDrawProjectiles);
             container.RegisterType(abstractionType, typeof(ProjectileDrawer));
             var obj = container.Resolve(abstractionType);
+            Assert.IsNotNull(obj, "Не удалось восстановить объект из контейнера");
 
             // TODO: А как насчет типизованного метода (вероятно, параметризованного)?
             // TODO: А нужен ли нам вообще этот слабо типизованный метод?
@@ -76,6 +77,23 @@ namespace Tests
             // TODO: Проверить работу с Singleton
 
 
+        }
+
+
+        [TestMethod]
+        public void TestResolveAndUse()
+        {
+            var container = new Container();
+
+            container.RegisterType(typeof(IDrawProjectiles), typeof(ProjectileDrawer));
+
+            var obj = container.Resolve(typeof(IDrawProjectiles));
+            Assert.IsNotNull(obj, "obj == null");
+            var drawer = obj as IDrawProjectiles;
+            Assert.IsNotNull(drawer, "drawer == null");
+
+            var projectile = new Projectile(drawer);
+            projectile.Draw(); 
         }
 
 
