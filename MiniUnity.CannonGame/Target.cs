@@ -47,7 +47,7 @@ namespace MiniUnity.CannonGame
             base.Update();
         }
 
-        private void Hit()
+        public void Hit()
         {
             if (Game.PlaySound)
                 targetHitSoundPlayer.Play();
