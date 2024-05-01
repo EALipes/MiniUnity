@@ -148,6 +148,17 @@ namespace MiniUnity.CannonGame
 
             // Если ядро упало - игра окончена.
             //Scene.IsOver = true;
+
+            //проверяем попадание
+            float hitPoint = Position.X;
+            float targetEnd = Scene.Target.Position.X / 10 * Game.ScreenScale;
+            float targetSize = Scene.Target.targetSize / 10 * Game.ScreenScale;
+            float targetStart = targetEnd - targetSize;
+
+            if (hitPoint > targetStart && hitPoint < targetEnd)
+            {
+                Scene.Target.Hit();
+            }
         }
 
 
