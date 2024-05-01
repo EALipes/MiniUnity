@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IocContainerTest.cs" />
+    <Compile Include="IOC.TestedClasses.cs" />
+    <Compile Include="IOC_ClassesForTesting3_Toporkov.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

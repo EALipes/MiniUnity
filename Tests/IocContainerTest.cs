@@ -3,12 +3,13 @@ using System.Numerics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MiniUnity.IOC;
 
+using IOC.TestedClasses;
+
 namespace Tests
 {
     [TestClass]
     public class IocContainerTest
     {
-
 
         [TestMethod]
         public void TestProjectileAndDrawerClasses()
@@ -45,24 +46,28 @@ namespace Tests
         public void TestRegisterType()
         {
             var container = new Container();
-            container.RegisterType(typeof(IDrawProjectiles), typeof(ProjectileDrawer));
-            var registered = container.IsRegistered(typeof(IDrawProjectiles), null);
-            // TODO: А где нам узнать, есть ли какие-то реализации для вот такого интерфейса?
-            // TODO: А если один класс реализует два интерфейса? И зарегистрирован как реализатор первого, а нам он нужен для второго?
+            container.RegisterType(typeof(IDraw<Projectile>), typeof(ProjectileDrawer));
+            //container.RegisterType(typeof(IDraw), typeof(ProjectileDrawer));
+            var registered = container.IsRegistered(typeof(IDraw), null);
             Assert.IsTrue(registered, "Должен быть зарегистрирован IDrawProjectiles");
-            //Assert.IsFalse(registered, "Не должен быть зарегистрирован IDrawProjectiles");
             
-            //var registered2 = container.IsRegistered(typeof(ProjectileDrawer), null);
-            //Assert.IsTrue(registered2, "Не зарегистрирован ProjectileDrawer");
-            //var registered3 = container.IsRegistered(typeof(ProjectileDrawerColored), null);
-            //Assert.IsFalse(registered3, "Не должен быть зарегистрирован ProjectileDrawerColored");
+            // TODO: Проверить регистрацию для случаев: - Просто тип 
+            // TODO: Проверить регистрацию для случаев: - Тип с указанием предназначения 
+            // TODO: Проверить регистрацию для случаев: - Повторная регистрация - должна выдаваться ошибка
+            // TODO: Проверить регистрацию для случаев: - Регистрация без назначения + Регистрация с назначением - допустимо?? (Пока не решил)
+            // TODO: Проверить регистрацию для случаев: - При проверке IsRegistered сравнение UsedForType c null должно обрабатываться корректно во всех случаях
+            // (type==type, type!=null, null!=type, null==null)
+
+
+            // TODO: Проверить - соответствует ли регистрируемый абстрактный тип указанному конкретному типу (приводим ли implementationType к abstractionType
+
         }
 
         [TestMethod]
         public void TestResolve()
         {
             var container = new Container();
-            var abstractionType = typeof(IDrawProjectiles);
+            var abstractionType = typeof(IDraw);
             container.RegisterType(abstractionType, typeof(ProjectileDrawer));
             var obj = container.Resolve(abstractionType);
             Assert.IsNotNull(obj, "Не удалось восстановить объект из контейнера");
@@ -86,86 +91,20 @@ namespace Tests
         {
             var container = new Container();
 
-            container.RegisterType(typeof(IDrawProjectiles), typeof(ProjectileDrawer));
+            container.RegisterType(typeof(IDraw), typeof(ProjectileDrawer));
 
-            var obj = container.Resolve(typeof(IDrawProjectiles));
+            var obj = container.Resolve(typeof(IDraw));
             Assert.IsNotNull(obj, "obj == null");
-            var drawer = obj as IDrawProjectiles;
+            var drawer = obj as IDraw;
+            var projectileDrawer = obj as ProjectileDrawer;
             Assert.IsNotNull(drawer, "drawer == null");
+            Assert.IsNotNull(projectileDrawer, "projectileDrawer == null");
 
-            var projectile = new Projectile(drawer);
+            var projectile = new Projectile(projectileDrawer);
             projectile.Draw(); 
         }
 
 
     }
 
-    #region Classes for testing
-
-    public interface IProjectile
-    {
-        Vector3 Position { get; set; }
-        Vector3 Velocity { get; set; }
-    }
-
-
-    public class Projectile : IProjectile
-    {
-        public Projectile(IDrawProjectiles drawer)
-        {
-            this.drawer = drawer;
-        }
-
-        public void Draw()
-        {
-            drawer.Draw(this);
-        }
-
-        private IDrawProjectiles drawer;
-
-        // Положение снаряда
-        public Vector3 Position { get; set; } = new Vector3();
-
-        // Скорость снаряда
-        public Vector3 Velocity { get; set; } = new Vector3();
-
-    }
-
-    public interface IDrawProjectiles
-    {
-        void Draw(IProjectile p);
-    }
-
-    /// <summary> Отрисовщик ядра
-    /// 
-    /// </summary>
-    public class ProjectileDrawer : IDrawProjectiles
-    {
-        public virtual void Draw(IProjectile p)
-        {
-            Console.WriteLine("вывод силами "+ GetType().Name +"." + System.Reflection.MethodBase.GetCurrentMethod()?.Name);
-
-            Console.WriteLine(p.GetType().Name + ":  " + nameof(p.Position) + "=" + p.Position + "; " + nameof(p.Velocity) + "=" + p.Velocity);
-        }
-    }
-
-
-    /// <summary> Отрисовщик ядра, рисующий другим цветом
-    /// 
-    /// </summary>
-    public class ProjectileDrawerColored : ProjectileDrawer, IDrawProjectiles
-    {
-        public override void Draw(IProjectile p)
-        {
-            Console.WriteLine("вывод силами "+ GetType().Name +"." + System.Reflection.MethodBase.GetCurrentMethod()?.Name);
-
-            var saveCol = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(p.GetType().Name + ":  " + nameof(p.Position) + "=" + p.Position + "; " + nameof(p.Velocity) + "=" + p.Velocity);
-            Console.ForegroundColor = saveCol;
-        }
-    }
-
-
-    #endregion
 }
