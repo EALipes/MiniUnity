@@ -47,9 +47,8 @@ namespace Tests
         {
             var container = new Container();
             container.RegisterType(typeof(IDraw<Projectile>), typeof(ProjectileDrawer));
-            //container.RegisterType(typeof(IDraw), typeof(ProjectileDrawer));
-            var registered = container.IsRegistered(typeof(IDraw), null);
-            Assert.IsTrue(registered, "Должен быть зарегистрирован IDrawProjectiles");
+            var registered = container.IsRegistered(typeof(IDraw<Projectile>), null);
+            Assert.IsTrue(registered, "Должен быть зарегистрирован Draw<Projectile>");
             
             // TODO: Проверить регистрацию для случаев: - Просто тип 
             // TODO: Проверить регистрацию для случаев: - Тип с указанием предназначения 
