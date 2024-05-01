@@ -69,15 +69,70 @@ namespace Tests
             var container = new Container();
             var abstractionType = typeof(IDraw);
             container.RegisterType(abstractionType, typeof(ProjectileDrawer));
+
+            // Простой тест создания простого объекта
             var obj = container.Resolve(abstractionType);
             Assert.IsNotNull(obj, "Не удалось восстановить объект из контейнера");
+
+            // Простой тест создания типизованного простого объекта
+            var drawer = container.Resolve<IDraw>();
+            Assert.IsNotNull(drawer, "Не удалось восстановить объект из контейнера");
 
             // TODO: А как насчет типизованного метода (вероятно, параметризованного)?
             // TODO: А нужен ли нам вообще этот слабо типизованный метод?
             // TODO: Наверное, нужна проверка, что реализация соответствует абстрактному интерфейсу?
-            
+
             // TODO: А как насчет создания незаригистрированного неабстрактного типа?
-            
+
+            // TODO: А как насчет создания неабстрактного типа, требующего в конструкторе параметр абстрактного типа ?
+
+            // TODO: Проверить работу с Singleton
+
+
+        }
+
+
+        [TestMethod]
+        public void TestResolveSpecialized()
+        {
+            // Тестируем регистрацию и создание объекта с несколькими реализациями одного интерфейса 
+            // и указанием предназначения, для какого класса каждая реализация предназначена
+            var container = new Container();
+            var abstractionType = typeof(IDraw);
+            container.RegisterType(abstractionType, typeof(ProjectileDrawer), typeof(Projectile));
+            container.RegisterType(abstractionType, typeof(CannonDrawerColored), typeof(Cannon));
+
+            // Простой тест создания простого объекта
+            //var drawer = container.Resolve<IDraw>();
+            //Assert.IsNotNull(drawer, "Не удалось восстановить объект из контейнера");
+            // TODO: Так, по идее, не должно сработать. Но проверим, попробуем
+            /// Действительно, возникает исключение. 
+            /// Resolve доработан, теперь он просто выдает null, но может и выдать исключение.
+            /// TODO: Подумать, что делать в этом случае.
+            /// TODO: Может быть, сделать так, чтоб контейнер находил одну из имеющихся специализированных ассоциаций? //Хотя, вряд ли это хорошая идея... Сейчас не соображу...
+
+            // Достаем Drawer с указанием предназначения
+            var drawer1 = container.Resolve<IDraw>(typeof(Projectile));
+            Assert.IsNotNull(drawer1, "Не удалось восстановить объект из контейнера");
+            var resolvedType = drawer1.GetType();
+            var rightType = typeof(ProjectileDrawer);
+            Assert.AreEqual(rightType, resolvedType, "Должен был создаться "+rightType.Name);
+
+            // Попробуем создать игровой объект с полученным отрисовщиком
+            var drawerNeeded = drawer1 as ProjectileDrawer;
+            var projectile = new Projectile(drawerNeeded);
+
+            // Тестируем работу объекта с отрисовщиком
+            projectile.drawer.Draw(projectile);
+            // TODO: Тут возникает зацикливание при вызове GameObjectDrawer<T>.Draw(object obj)
+            // Тут, теоретически, можно было бы сделать метод без параметра, но лучше указать отрисовываемый объект явно - см. описание метода
+
+            // TODO: А как насчет типизованного метода (вероятно, параметризованного)?
+            // TODO: А нужен ли нам вообще этот слабо типизованный метод?
+            // TODO: Наверное, нужна проверка, что реализация соответствует абстрактному интерфейсу?
+
+            // TODO: А как насчет создания незаригистрированного неабстрактного типа?
+
             // TODO: А как насчет создания неабстрактного типа, требующего в конструкторе параметр абстрактного типа ?
 
             // TODO: Проверить работу с Singleton

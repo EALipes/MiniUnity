@@ -28,7 +28,7 @@ namespace IOC.TestedClasses
     public interface IDraw<T> : IDraw
     where T : GameObject
     {
-        void Draw(T gameObject);
+        //void Draw<T>(T gameObject);
     }
     #endregion Interfaces
 
@@ -41,10 +41,14 @@ namespace IOC.TestedClasses
             this.drawer = drawer;
         }
 
-        protected IDraw drawer;
+        // TODO: Подозреваю, что придется сделать его public
+        protected internal IDraw drawer;
+        //protected internal IDraw drawer;
 
         public void Draw()
         {
+            // Если мы хотим вызвать метод отрисовщика из игрового объекта - придется использовать непараметризованный интерфейс,
+            // что не очень удобно и не очень красиво.
             // TODO: Похоже, нежелательно вызывать методы Drawer из GameObject - это создает лишние зависимости
             drawer.Draw(this);
         }
@@ -90,16 +94,30 @@ namespace IOC.TestedClasses
     public class GameObjectDrawer<T> : IDraw<T>
     where T : GameObject
     {
+        /// <summary> Отрисовка с указанием отрисовываемого объекта. 
+        /// Причем с типизованным указанием - чтоб видеть его свойства, без приведений типа и т.п. трюков.
+        /// </summary>
+        /// <param name="p">Отрисовываемый объект</param>
+        /// <remarks>
+        /// ! Можно было бы задать отрисовываемый объект в свойстве отрисовщика.
+        /// ! Но лучше сделать явный параметр.
+        /// ! Тогда мы можем решать - будет ли создаваться свой отрисовщик для каждого объекта, 
+        /// ! или же можно создать один отрисовщик и отрисовать им все объекты соотв. типа.
+        /// Поэтому вызывать придется как projectile.drawer.Draw(projectile),
+        /// что на первый взгляд кажется несколько излишним.
+        /// </remarks>
         public virtual void Draw(T p)
         {
-
+            // TODO: Надо ли тут возбуждать исключение???
+            //throw new NotImplementedException("Не перекрыт метод Draw");
         }
 
+
         // TODO: И вот, похоже, такую фигню придется творить с каждым методом, который мы хотим вызывать через GameObject или непараметризованный IDrawer
-        public void Draw(object obj)
+        void IDraw.Draw(object obj)
         {
-            T p = (T) obj;
-            Draw(obj);
+            T p = (T)obj;
+            Draw(p);
         }
     }
 
@@ -113,7 +131,7 @@ namespace IOC.TestedClasses
         //    Draw(p as Projectile);
         //}
 
-        public virtual void Draw(Projectile p)
+        public override void Draw(Projectile p)
         {
             Console.WriteLine("вывод силами " + GetType().Name + "." + System.Reflection.MethodBase.GetCurrentMethod()?.Name);
 

@@ -182,6 +182,11 @@ namespace MiniUnity.IOC
             if (e == null)
             {
                 // Если нет указаний, какой тип создавать вместо указанного - пробуем создать указанный
+                if (abstractionType.IsAbstract)
+                {
+                    //throw new MissingMethodException("Не указан конкретный создаваемый класс, создать объект типа "+abstractionType.Name + " не удалось");
+                    return null;
+                }
                 var obj = CreateNew<T>();
                 //var obj = CreateNew(abstractionType);
                 return obj;
