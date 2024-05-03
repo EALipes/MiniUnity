@@ -117,14 +117,13 @@ namespace Tests
             var rightType = typeof(ProjectileDrawer);
             Assert.AreEqual(rightType, resolvedType, "Должен был создаться "+rightType.Name);
 
-            // Попробуем создать игровой объект с полученным отрисовщиком
-            var drawerNeeded = drawer1 as ProjectileDrawer;
-            var projectile = new Projectile(drawerNeeded);
+            ////// Дальше уже лишнее, это предмет следующего теста
+            //// Попробуем создать игровой объект с полученным отрисовщиком
+            //var drawerNeeded = drawer1 as ProjectileDrawer;
+            //var projectile = new Projectile(drawerNeeded);
 
-            // Тестируем работу объекта с отрисовщиком
-            projectile.drawer.Draw(projectile);
-            // TODO: Тут возникает зацикливание при вызове GameObjectDrawer<T>.Draw(object obj)
-            // Тут, теоретически, можно было бы сделать метод без параметра, но лучше указать отрисовываемый объект явно - см. описание метода
+            //// Тестируем работу объекта с отрисовщиком
+            //projectile.drawer.Draw(projectile);
 
             // TODO: А как насчет типизованного метода (вероятно, параметризованного)?
             // TODO: А нужен ли нам вообще этот слабо типизованный метод?
@@ -143,19 +142,45 @@ namespace Tests
         [TestMethod]
         public void TestResolveAndUse()
         {
+            // Создать отрисовщик и использовать его в ядре, чтоб проверить его работу
+
             var container = new Container();
 
             container.RegisterType(typeof(IDraw), typeof(ProjectileDrawer));
 
-            var obj = container.Resolve(typeof(IDraw));
+            var obj = container.Resolve<IDraw>();
+            //var obj = container.Resolve(typeof(IDraw));
             Assert.IsNotNull(obj, "obj == null");
             var drawer = obj as IDraw;
+            
+            // Попробуем создать игровой объект с полученным отрисовщиком
             var projectileDrawer = obj as ProjectileDrawer;
             Assert.IsNotNull(drawer, "drawer == null");
             Assert.IsNotNull(projectileDrawer, "projectileDrawer == null");
-
+            
+            // Тестируем работу объекта с отрисовщиком
             var projectile = new Projectile(projectileDrawer);
             projectile.Draw(); 
+        }
+
+
+        [TestMethod]
+        public void TestResolveWithComplexConstructor()
+        {
+            // Создание игрового объекта полностью - одним вызовом
+            // Т.е. контейнер должен создать и объект, и тот объект, от которого зависит конструктор создаваемого объекта.
+
+            var container = new Container();
+
+            container.RegisterType(typeof(IDraw), typeof(ProjectileDrawer), typeof(Projectile));
+            container.RegisterType(typeof(IDraw), typeof(CannonDrawerColored), typeof(Cannon));
+
+            // Попробуем создать игровой объект
+            var projectile = container.Resolve<Projectile>();
+           
+            // Тестируем работу объекта с отрисовщиком
+            projectile.Draw(); 
+
         }
 
 
